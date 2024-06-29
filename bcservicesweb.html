@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Integración con Business Central desde .NET</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manual de Integración con Business Central desde .NET</h1>
+
+        <h2>1. Obtener el Token de Acceso</h2>
+        <p>Para acceder a los servicios web de Business Central, primero necesitas obtener un token de acceso de Azure Active Directory (AAD) / Microsoft Entra ID. A continuación se muestra cómo hacerlo:</p>
+
+        <h3>1.1. Configuración de Variables</h3>
+        <pre><code class="language-csharp">
+        // URL parts
+        private const string TenantId = "your-tenant-id"; //ej: 4c2543db-5g31-4b8e-8dc6-123c73b8aefe"
+        private const string ApiVersion = "v2.0";
+
+        // Auth related constants
+        private static readonly string tokenUri = $"https://login.windows.net/{TenantId}/oauth2/{ApiVersion}/token";
+        private static readonly string clientId = "your-application-(client)-ID"; //9e09312c-a22s-1b11-a11v-2855c3ee6fa3
+        private static readonly string clientSecret = "your-Application-clientSecret"; //0aH9Q~XO14Wx9OwpHE3it5DXGNypsF.i7kt4ups8
+        private static readonly string scope = "https://api.businesscentral.dynamics.com/.default";
+        </code></pre>
+
+        <h3>1.2. Obtener el Token de Acceso</h3>
+        <p>El siguiente método muestra cómo obtener el token de acceso:</p>
+        <pre><code class="language-csharp">
+        public static async Task&lt;string&gt; GetAccessToken()
+        {
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var body = new FormUrlEncodedContent(new[]
+                    {
+                        new KeyValuePair&lt;string, string&gt;("grant_type", "client_credentials"),
+                        new KeyValuePair&lt;string, string&gt;("client_id", clientId),
+                        new KeyValuePair&lt;string, string&gt;("client_secret", clientSecret),
+                        new KeyValuePair&lt;string, string&gt;("scope", scope)
+                    });
+
+                    var response = await httpClient.PostAsync(tokenUri, body);
+                    response.EnsureSuccessStatusCode();
+
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    dynamic jsonResponse = JsonConvert.DeserializeObject(responseBody);
+                    return jsonResponse.access_token;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el token de acceso.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+        }
+        </code></pre>
+
+        <h2>2. Hacer una Petición a un Servicio Web de Business Central</h2>
+        <p>Una vez que tienes el token de acceso, puedes hacer peticiones a los servicios web de Business Central. A continuación se muestra cómo obtener proyectos y estudios.</p>
+
+        <h3>2.1. Obtener Proyectos</h3>
+        <pre><code class="language-csharp">
+        public static async Task&lt;List&lt;Proyecto&gt;&gt; ObtenerProyectos()
+        {
+            try
+            {
+                string accessToken = await GetAccessToken();
+                string url = $"https://api.businesscentral.dynamics.com/{ApiVersion}/{TenantId}/{Environment}/ODataV4/Company('{Company}')/ObtenerProyectos";
+
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+                    var response = await httpClient.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
+
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject&lt;BusinessCentralResponse&gt;(responseBody);
+                    return data.value;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los proyectos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+        }
+        </code></pre>
+
+        <!-- <h3>2.2. Obtener Estudios</h3>
+        <pre><code class="language-csharp">
+        public static async Task&lt;List&lt;Estudio&gt;&gt; ObtenerEstudios(string projectId)
+        {
+            try
+            {
+                string accessToken = await GetAccessToken();
+                string url = $"https://api.businesscentral.dynamics.com/{ApiVersion}/{TenantId}/{Environment}/ODataV4/Company('{Company}')/ObtenerEstudios(ProjectID='{projectId}')";
+
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+                    var response = await httpClient.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
+
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject&lt;BusinessCentralEstudioResponse&gt;(responseBody);
+                    return data.value;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener los estudios.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+        }
+        </code></pre> -->
+
+        <!-- <h3>2.3. Clases de Respuesta</h3>
+        <pre><code class="language-csharp">
+        public class BusinessCentralResponse
+        {
+            public List&lt;Proyecto&gt; value { get; set; }
+        }
+
+        public class BusinessCentralEstudioResponse
+        {
+            public List&lt;Estudio&gt; value { get; set; }
+        }
+        </code></pre> -->
+    </div>
+</body>
+</html>

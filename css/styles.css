@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 60px 20px; /* Añadir padding superior e inferior de 60px y padding izquierdo y derecho de 20px */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    height: 60px; /* Fija la altura del header */
+    position: fixed;
+    top: 0;
+    left: 20px; /* Ajustar para incluir el padding del body */
+    right: 20px; /* Ajustar para incluir el padding del body */
+    width: calc(100% - 40px); /* Ajustar ancho considerando el padding del body */
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+    position: relative;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 16px;
+    display: block;
+}
+
+nav ul li a:hover, .dropdown:hover .dropbtn {
+    background-color: #111;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+main {
+    padding: 20px;
+    margin-top: 60px; /* Espacio para el header fijo */
+    margin-bottom: 60px; /* Espacio para el footer fijo */
+    min-height: calc(100vh - 120px - 40px); /* Altura mínima para ocupar el espacio restante menos header y footer */
+}
+
+section {
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    height: 60px; /* Fija la altura del footer */
+    position: fixed;
+    bottom: 0;
+    left: 20px; /* Ajustar para incluir el padding del body */
+    right: 20px; /* Ajustar para incluir el padding del body */
+    width: calc(100% - 40px); /* Ajustar ancho considerando el padding del body */
+}
