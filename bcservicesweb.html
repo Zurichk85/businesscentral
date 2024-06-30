@@ -4,29 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual de Integración con Business Central desde .NET</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ddd;
-            overflow-x: auto;
-        }
-        code {
-            font-family: Consolas, monospace;
-        }
-    </style>
+    <link rel="stylesheet" href="css/stylebcservices.css">
+    <link rel="icon" href="/images/favicon.png" type="image/png">
 </head>
 <body>
     <div class="container">
@@ -82,16 +61,18 @@
         </code></pre>
 
         <h2>2. Hacer una Petición a un Servicio Web de Business Central</h2>
-        <p>Una vez que tienes el token de acceso, puedes hacer peticiones a los servicios web de Business Central. A continuación se muestra cómo obtener proyectos y estudios.</p>
+        <p>Una vez que tienes el token de acceso, puedes hacer peticiones a los servicios web de Business Central. A continuación se muestra cómo obtener los registros de Movs Productos:</p>
 
-        <h3>2.1. Obtener Proyectos</h3>
+        <h3>2.1. Obtener ItemLedgerEntries</h3>
         <pre><code class="language-csharp">
-        public static async Task&lt;List&lt;Proyecto&gt;&gt; ObtenerProyectos()
+        public static async Task&lt;List&lt;ItemLedgerEntry&gt;&gt; ObtenerItemLedgerEntries()
         {
+            string errorGet = "Error al obtener los registros de Movs Productos desde Business Central";
+            string errorNoData = "No se recibieron datos válidos desde la API.";
             try
             {
                 string accessToken = await GetAccessToken();
-                string url = $"https://api.businesscentral.dynamics.com/{ApiVersion}/{TenantId}/{Environment}/ODataV4/Company('{Company}')/ObtenerProyectos";
+                string url = $"{BaseUrl}/{ApiVersion}/{TenantId}/{Environment}{ItemLedgerEntriesEndpoint}";
 
                 using (var httpClient = new HttpClient())
                 {
@@ -100,58 +81,118 @@
                     response.EnsureSuccessStatusCode();
 
                     var responseBody = await response.Content.ReadAsStringAsync();
-                    var data = JsonConvert.DeserializeObject&lt;BusinessCentralResponse&gt;(responseBody);
-                    return data.value;
+                    var data = JsonConvert.DeserializeObject&lt;BusinessCentralItemLedgerEntriesResponse&gt;(responseBody);
+
+                    if (data != null && data.value != null)
+                    {
+                        // Logging para verificar los datos recibidos
+                        foreach (var entry in data.value)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"EntryNo: {entry.EntryNo}, ItemNo: {entry.ItemNo}, Description: {entry.Description}");
+                        }
+
+                        return data.value;
+                    }
+                    else
+                    {
+                        // Manejo de caso cuando no hay datos válidos
+                        System.Diagnostics.Debug.WriteLine(errorNoData);
+                        return new List&lt;ItemLedgerEntry&gt;();
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener los proyectos.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                logger.Error(ex, errorGet);
+                MessageBox.Show(errorGet, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 throw;
             }
         }
         </code></pre>
 
-        <!-- <h3>2.2. Obtener Estudios</h3>
+        <h2>3. Mostrar Datos en una Ventana WPF</h2>
+        <p>Una vez que tienes los datos, puedes mostrarlos en una ventana WPF. A continuación se muestra cómo hacerlo:</p>
+
+        <h3>3.1. Definir la Ventana WPF</h3>
         <pre><code class="language-csharp">
-        public static async Task&lt;List&lt;Estudio&gt;&gt; ObtenerEstudios(string projectId)
+&lt;Window x:Class="TestParaManual.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestParaManual"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"&gt;
+    &lt;Grid&gt;
+        &lt;Button Content="Load Item Ledger Entries" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" Click="OnLoadItemLedgerEntriesButtonClick"/&gt;
+        &lt;ListView Name="ItemLedgerEntriesListView" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="760" Margin="10,50,0,0"&gt;
+            &lt;ListView.View&gt;
+                &lt;GridView&gt;
+                    &lt;GridViewColumn Header="EntryNo" DisplayMemberBinding="{Binding EntryNo}" Width="120"/&gt;
+                    &lt;GridViewColumn Header="ItemNo" DisplayMemberBinding="{Binding ItemNo}" Width="120"/&gt;
+                    &lt;GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="120"/&gt;
+                    <!-- Agrega más columnas según sea necesario -->
+                &lt;/GridView&gt;
+            &lt;/ListView.View&gt;
+        &lt;/ListView&gt;
+    &lt;/Grid&gt;
+&lt;/Window&gt;
+        </code></pre>
+
+        <h3>3.2. Código Behind para la Ventana WPF</h3>
+        <pre><code class="language-csharp">
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace TestParaManual
+{
+    public partial class MainWindow : Window
+    {
+        private ObservableCollection&lt;ItemLedgerEntry&gt; ItemLedgerEntriesL;
+
+        public MainWindow()
         {
+            InitializeComponent();
+            ItemLedgerEntriesL = new ObservableCollection&lt;ItemLedgerEntry&gt;();
+            ItemLedgerEntriesListView.ItemsSource = ItemLedgerEntriesL;
+        }
+
+        private async void OnLoadItemLedgerEntriesButtonClick(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"INICIO!");
+            await LoadItemLedgerEntries();
+        }
+
+        private async Task LoadItemLedgerEntries()
+        {
+            string errorCargar = "Error al cargar los registros de Movs Productos:";
             try
             {
-                string accessToken = await GetAccessToken();
-                string url = $"https://api.businesscentral.dynamics.com/{ApiVersion}/{TenantId}/{Environment}/ODataV4/Company('{Company}')/ObtenerEstudios(ProjectID='{projectId}')";
-
-                using (var httpClient = new HttpClient())
+                var itemLedgerEntries = await BusinessCentralAPI.ObtenerItemLedgerEntries();
+                ItemLedgerEntriesL.Clear(); // Limpiar la lista antes de agregar nuevos elementos
+                foreach (var entry in itemLedgerEntries)
                 {
-                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-                    var response = await httpClient.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-
-                    var responseBody = await response.Content.ReadAsStringAsync();
-                    var data = JsonConvert.DeserializeObject&lt;BusinessCentralEstudioResponse&gt;(responseBody);
-                    return data.value;
+                    ItemLedgerEntriesL.Add(entry);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al obtener los estudios.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
+                MessageBox.Show($"{errorCargar} {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        </code></pre> -->
+    }
+}
+        </code></pre>
 
-        <!-- <h3>2.3. Clases de Respuesta</h3>
-        <pre><code class="language-csharp">
-        public class BusinessCentralResponse
-        {
-            public List&lt;Proyecto&gt; value { get; set; }
-        }
-
-        public class BusinessCentralEstudioResponse
-        {
-            public List&lt;Estudio&gt; value { get; set; }
-        }
-        </code></pre> -->
+        <h3>3.3. Ejemplo de la Ventana WPF</h3>
+        <p>A continuación se muestran ejemplos visuales de la ventana WPF con los datos cargados:</p>
+        <img src="images/ejwpf.png" alt="Ejemplo de la ventana WPF - Imagen 1" style="width:100%; max-width:600px;">
+        <img src="images/ejwpf2.png" alt="Ejemplo de la ventana WPF - Imagen 2" style="width:100%; max-width:600px;">
     </div>
 </body>
 </html>
