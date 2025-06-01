@@ -1,0 +1,59 @@
+{
+  "siteName": "BC Manuales",
+  "siteDescription": "Manuales y recursos para desarrolladores de Business Central",
+  "author": "Adrián Espí Peña",
+  "version": "1.0.0",
+  "copyright": "2025 Adrián Espí Peña - Todos los derechos reservados",
+  "socialLinks": {
+    "linkedin": "https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/",
+    "youtube": "https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw",
+    "github": "https://github.com/",
+    "cv": "https://zurichk.github.io/"
+  },
+  "manuales": [
+    {
+      "id": "servicios-web",
+      "title": "Consumir Servicio Web desde .Net",
+      "description": "Aprende a integrar aplicaciones .NET con los servicios web de Business Central",
+      "file": "manuales/servicios-web.html",
+      "icon": "fas fa-code"
+    },
+    {
+      "id": "integracion-apis",
+      "title": "Integración con APIs REST",
+      "description": "Guía completa para integrar Business Central con APIs REST externas",
+      "file": "manuales/integracion-apis.html",
+      "icon": "fas fa-exchange-alt"
+    },
+    {
+      "id": "personalizacion-paginas",
+      "title": "Personalización de Páginas",
+      "description": "Guía completa para personalizar páginas en Business Central usando AL",
+      "file": "manuales/personalizacion-paginas.html",
+      "icon": "fas fa-paint-brush"
+    },
+    {
+      "id": "power-automate-integracion",
+      "title": "Integración Power Automate",
+      "description": "Automatiza procesos empresariales integrando Power Automate con Business Central",
+      "file": "manuales/power-automate-integracion.html",
+      "icon": "fas fa-bolt"
+    }
+  ],
+  "recursos": [
+    {
+      "id": "traductor",
+      "title": "Traductor BC",
+      "description": "Herramienta para traducir textos y etiquetas de Business Central al español",
+      "url": "https://rendbctrans.onrender.com/",
+      "icon": "fas fa-language"
+    },
+    {
+      "id": "pdf-converter",
+      "title": "Convertidor PDF a Word",
+      "description": "Convierte archivos PDF a documentos Word editables de forma gratuita y rápida",
+      "url": "https://smallpdf.com/es/pdf-a-word",
+      "icon": "fas fa-file-alt"
+    }
+  ]
+}

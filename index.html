@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
+<head>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manuales de Business Central</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Manuales de Business Central</title>    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link rel="icon" href="assets/icons/favicon.png" type="image/png">
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li class="logo" style="float: left;">
-                    <img src="images/favicon.png" alt="BC Logo">
+                    <img src="assets/icons/favicon.png" alt="BC Logo">
                     <span class="logo-text">BC Manuales</span>
-                </li>
-                <li><a href="#home"><i class="fas fa-home"></i> Inicio</a></li>
+                </li>                <li><a href="#home"><i class="fas fa-home"></i> Inicio</a></li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-book"></i> Manuales</a>
                     <div class="dropdown-content">
-                        <a href="bcservicesweb.html"><i class="fas fa-code"></i> Consumir Servicio Web desde .Net</a>
+                        <a href="manuales/servicios-web.html"><i class="fas fa-code"></i> Consumir Servicio Web desde .Net</a>
                         <a href="#manual2"><i class="fas fa-cogs"></i> Manual 2</a>
                         <a href="#manual3"><i class="fas fa-tasks"></i> Manual 3</a>
                     </div>
@@ -30,8 +28,12 @@
                     <div class="dropdown-content">
                         <a href="https://rendbctrans.onrender.com/" target="_blank"><i class="fas fa-language"></i> Traductor BC</a>
                     </div>
+                </li>                <li><a href="../index.html#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                <li class="search-container" id="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Buscar...">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-results" id="search-results"></div>
                 </li>
-                <li><a href="#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
                 <li class="dropdown" style="float: right;">
                     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i> Conectar</a>
                     <div class="dropdown-content">
@@ -54,25 +56,23 @@
             <p class="mb-3">Recursos y guías técnicas para desarrolladores de Microsoft Dynamics 365 Business Central.</p>
             <div class="card-container">
                 <div class="card">
-                    <img src="https://learn.microsoft.com/es-es/dynamics365/business-central/media/ui-experience/dynamics-365-bc-new-company-page.png" alt="Business Central" class="card-img">
+                    <img data-src="https://learn.microsoft.com/es-es/dynamics365/business-central/media/ui-experience/dynamics-365-bc-new-company-page.png" alt="Business Central" class="card-img lazy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGNUY1RjUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q2FyZ2FuZG8uLi48L3RleHQ+PC9zdmc+">
                     <div class="card-content">
                         <h3 class="card-title">Manuales de Desarrollo</h3>
                         <p class="card-text">Guías técnicas para desarrolladores que trabajan con Business Central.</p>
                         <a href="#manual1" class="btn">Ver Manuales</a>
                     </div>
                 </div>
-                
-                <div class="card">
-                    <img src="https://learn.microsoft.com/es-es/dynamics365/business-central/developer/media/bc-al-add-package/add-package-command.png" alt="Business Central API" class="card-img">
+                  <div class="card">
+                    <img data-src="https://learn.microsoft.com/es-es/dynamics365/business-central/developer/media/bc-al-add-package/add-package-command.png" alt="Business Central API" class="card-img lazy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGNUY1RjUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q2FyZ2FuZG8uLi48L3RleHQ+PC9zdmc+">
                     <div class="card-content">
                         <h3 class="card-title">Integración con APIs</h3>
                         <p class="card-text">Aprende a conectar tus aplicaciones con Business Central mediante APIs.</p>
                         <a href="bcservicesweb.html" class="btn">Ver Guías</a>
                     </div>
                 </div>
-                
-                <div class="card">
-                    <img src="https://learn.microsoft.com/es-es/dynamics365/business-central/media/growth-understand-tables/all-tables.png" alt="Recursos" class="card-img">
+                  <div class="card">
+                    <img data-src="https://learn.microsoft.com/es-es/dynamics365/business-central/media/growth-understand-tables/all-tables.png" alt="Recursos" class="card-img lazy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGNUY1RjUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q2FyZ2FuZG8uLi48L3RleHQ+PC9zdmc+">
                     <div class="card-content">
                         <h3 class="card-title">Recursos Adicionales</h3>
                         <p class="card-text">Herramientas y recursos complementarios para tu desarrollo.</p>
@@ -140,13 +140,15 @@
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
-            </div>
+                <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>            </div>
         </div>
-        <div class="copyright">
-            <p>&copy; 2025 Adrián Espí Peña - Todos los derechos reservados.</p>
+        <div class="copyright">            <p>&copy; 2025 Adrián Espí Peña - Todos los derechos reservados.</p>
         </div>
-    </footer>
-    <script src="js/script.js"></script>
+    </footer>    <script src="assets/js/config.js"></script>
+    <script src="assets/js/ui-config.js"></script>
+    <script src="assets/js/analytics.js"></script>
+    <script src="assets/js/lazy-loading.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

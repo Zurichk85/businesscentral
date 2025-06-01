@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integración con APIs REST - Manuales BC</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/manuales.css">
+    <link rel="stylesheet" href="../assets/css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css">
+    <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="logo" style="float: left;">
+                    <a href="../index.html">
+                        <img src="../assets/icons/favicon.png" alt="BC Logo">
+                        <span class="logo-text">BC Manuales</span>
+                    </a>
+                </li>
+                <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-book"></i> Manuales</a>
+                    <div class="dropdown-content" id="manuales-dropdown">
+                        <!-- Los enlaces se cargarán dinámicamente desde config.json -->
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-tools"></i> Más Recursos</a>
+                    <div class="dropdown-content" id="recursos-dropdown">
+                        <!-- Los recursos se cargarán dinámicamente desde config.json -->
+                    </div>
+                </li>
+                <li><a href="../index.html#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                <li class="search-container" id="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Buscar...">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-results" id="search-results"></div>
+                </li>
+                <li class="dropdown" style="float: right;">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i> Conectar</a>
+                    <div class="dropdown-content" id="social-dropdown">
+                        <!-- Las redes sociales se cargarán dinámicamente desde config.json -->
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="manual-header">
+            <h1>Integración con APIs REST en Business Central</h1>
+            <p class="manual-description">Guía completa para integrar Business Central con APIs REST externas</p>
+        </div>
+
+        <div class="manual-container">
+            <aside class="toc">
+                <h3>Contenidos</h3>
+                <ul id="toc-list">
+                    <li><a href="#introduccion">Introducción</a></li>
+                    <li><a href="#configuracion-basica">Configuración Básica</a></li>
+                    <li><a href="#consumir-apis">Consumir APIs REST</a></li>
+                    <li><a href="#autenticacion">Autenticación</a></li>
+                    <li><a href="#manejo-errores">Manejo de Errores</a></li>
+                    <li><a href="#ejemplos-practicos">Ejemplos Prácticos</a></li>
+                    <li><a href="#buenas-practicas">Buenas Prácticas</a></li>
+                </ul>
+            </aside>
+
+            <article class="manual-content">
+                <section id="introduccion">
+                    <h2>Introducción</h2>
+                    <p>Business Central permite integrarse fácilmente con APIs REST externas usando los objetos HttpClient y JsonToken. Esta guía te mostrará cómo implementar estas integraciones de manera efectiva.</p>
+                    
+                    <div class="info-box">
+                        <h4><i class="fas fa-info-circle"></i> Requisitos</h4>
+                        <ul>
+                            <li>Business Central versión 15.0 o superior</li>
+                            <li>Permisos para crear objetos AL</li>
+                            <li>Conocimientos básicos de JSON y HTTP</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="configuracion-basica">
+                    <h2>Configuración Básica</h2>
+                    <p>Antes de comenzar a consumir APIs, necesitamos configurar nuestro entorno y crear las estructuras básicas.</p>
+                    
+                    <h3>Crear un Codeunit para la Integración</h3>
+                    <pre><code class="language-pascal">codeunit 50100 "API Integration Management"
+{
+    trigger OnRun()
+    begin
+        
+    end;
+
+    local procedure InitializeHttpClient(var HttpClient: HttpClient)
+    begin
+        HttpClient.Clear();
+        HttpClient.Timeout := 30000; // 30 segundos
+        HttpClient.DefaultRequestHeaders.Add('User-Agent', 'Business Central Integration');
+    end;
+}</code></pre>
+                </section>
+
+                <section id="consumir-apis">
+                    <h2>Consumir APIs REST</h2>
+                    <p>El proceso básico para consumir una API REST involucra varios pasos fundamentales.</p>
+
+                    <h3>GET Request Básico</h3>
+                    <pre><code class="language-pascal">local procedure GetApiData(Url: Text): Text
+var
+    HttpClient: HttpClient;
+    HttpResponseMessage: HttpResponseMessage;
+    ResponseText: Text;
+begin
+    InitializeHttpClient(HttpClient);
+    
+    if not HttpClient.Get(Url, HttpResponseMessage) then
+        Error('Error al conectar con la API');
+        
+    if not HttpResponseMessage.IsSuccessStatusCode then
+        Error('Error HTTP: %1', HttpResponseMessage.HttpStatusCode);
+        
+    HttpResponseMessage.Content.ReadAs(ResponseText);
+    exit(ResponseText);
+end;</code></pre>
+
+                    <h3>POST Request con JSON</h3>
+                    <pre><code class="language-pascal">local procedure PostJsonData(Url: Text; JsonData: Text): Text
+var
+    HttpClient: HttpClient;
+    HttpContent: HttpContent;
+    HttpHeaders: HttpHeaders;
+    HttpResponseMessage: HttpResponseMessage;
+    ResponseText: Text;
+begin
+    InitializeHttpClient(HttpClient);
+    
+    HttpContent.WriteFrom(JsonData);
+    HttpContent.GetHeaders(HttpHeaders);
+    HttpHeaders.Clear();
+    HttpHeaders.Add('Content-Type', 'application/json');
+    
+    if not HttpClient.Post(Url, HttpContent, HttpResponseMessage) then
+        Error('Error al enviar datos a la API');
+        
+    if not HttpResponseMessage.IsSuccessStatusCode then
+        Error('Error HTTP: %1', HttpResponseMessage.HttpStatusCode);
+        
+    HttpResponseMessage.Content.ReadAs(ResponseText);
+    exit(ResponseText);
+end;</code></pre>
+                </section>
+
+                <section id="autenticacion">
+                    <h2>Autenticación</h2>
+                    <p>La mayoría de APIs requieren algún tipo de autenticación. Aquí cubrimos los métodos más comunes.</p>
+
+                    <h3>API Key</h3>
+                    <pre><code class="language-pascal">local procedure AddApiKeyAuthentication(var HttpClient: HttpClient; ApiKey: Text)
+begin
+    HttpClient.DefaultRequestHeaders.Add('X-API-Key', ApiKey);
+end;</code></pre>
+
+                    <h3>Bearer Token</h3>
+                    <pre><code class="language-pascal">local procedure AddBearerTokenAuthentication(var HttpClient: HttpClient; Token: Text)
+begin
+    HttpClient.DefaultRequestHeaders.Add('Authorization', 'Bearer ' + Token);
+end;</code></pre>
+                </section>
+
+                <section id="manejo-errores">
+                    <h2>Manejo de Errores</h2>
+                    <p>Un manejo robusto de errores es crucial para las integraciones de producción.</p>
+
+                    <pre><code class="language-pascal">local procedure SafeApiCall(Url: Text; var ErrorMessage: Text): Text
+var
+    HttpClient: HttpClient;
+    HttpResponseMessage: HttpResponseMessage;
+    ResponseText: Text;
+begin
+    Clear(ErrorMessage);
+    
+    try
+        InitializeHttpClient(HttpClient);
+        
+        if not HttpClient.Get(Url, HttpResponseMessage) then begin
+            ErrorMessage := 'No se pudo conectar con la API';
+            exit('');
+        end;
+        
+        case HttpResponseMessage.HttpStatusCode of
+            200: begin
+                HttpResponseMessage.Content.ReadAs(ResponseText);
+                exit(ResponseText);
+            end;
+            401: ErrorMessage := 'No autorizado - verificar credenciales';
+            404: ErrorMessage := 'Recurso no encontrado';
+            429: ErrorMessage := 'Demasiadas peticiones - intentar más tarde';
+            500: ErrorMessage := 'Error interno del servidor';
+            else ErrorMessage := StrSubstNo('Error HTTP: %1', HttpResponseMessage.HttpStatusCode);
+        end;
+    except
+        ErrorMessage := GetLastErrorText();
+    end;
+end;</code></pre>
+                </section>
+
+                <section id="ejemplos-practicos">
+                    <h2>Ejemplos Prácticos</h2>
+                    <p>Veamos algunos ejemplos reales de integración con APIs populares.</p>
+
+                    <h3>Ejemplo: Consultar Tasas de Cambio</h3>
+                    <pre><code class="language-pascal">local procedure GetExchangeRates(): Decimal
+var
+    HttpClient: HttpClient;
+    HttpResponseMessage: HttpResponseMessage;
+    JsonObject: JsonObject;
+    JsonToken: JsonToken;
+    ResponseText: Text;
+    Rate: Decimal;
+begin
+    InitializeHttpClient(HttpClient);
+    
+    if HttpClient.Get('https://api.exchangerate-api.com/v4/latest/USD', HttpResponseMessage) then begin
+        HttpResponseMessage.Content.ReadAs(ResponseText);
+        
+        if JsonObject.ReadFrom(ResponseText) then begin
+            if JsonObject.SelectToken('rates.EUR', JsonToken) then begin
+                Rate := JsonToken.AsValue().AsDecimal();
+                exit(Rate);
+            end;
+        end;
+    end;
+    
+    Error('No se pudo obtener la tasa de cambio');
+end;</code></pre>
+                </section>
+
+                <section id="buenas-practicas">
+                    <h2>Buenas Prácticas</h2>
+                    <div class="warning-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Consideraciones Importantes</h4>
+                        <ul>
+                            <li><strong>Timeouts:</strong> Siempre configurar timeouts apropiados</li>
+                            <li><strong>Retry Logic:</strong> Implementar lógica de reintentos para errores temporales</li>
+                            <li><strong>Rate Limiting:</strong> Respetar los límites de la API</li>
+                            <li><strong>Logging:</strong> Registrar todas las llamadas para auditoria</li>
+                            <li><strong>Seguridad:</strong> Nunca hardcodear credenciales en el código</li>
+                            <li><strong>Testing:</strong> Probar exhaustivamente en ambiente de desarrollo</li>
+                        </ul>
+                    </div>
+
+                    <h3>Configuración de Setup</h3>
+                    <pre><code class="language-pascal">table 50100 "API Integration Setup"
+{
+    fields
+    {
+        field(1; "Primary Key"; Code[10])
+        {
+            DataClassification = SystemMetadata;
+        }
+        field(10; "Base URL"; Text[250])
+        {
+            DataClassification = EndUserIdentifiableInformation;
+        }
+        field(20; "API Key"; Text[100])
+        {
+            DataClassification = EndUserPseudonymousIdentifiers;
+        }
+        field(30; "Timeout (ms)"; Integer)
+        {
+            DataClassification = SystemMetadata;
+            InitValue = 30000;
+        }
+        field(40; "Retry Count"; Integer)
+        {
+            DataClassification = SystemMetadata;
+            InitValue = 3;
+        }
+    }
+    
+    keys
+    {
+        key(PK; "Primary Key")
+        {
+            Clustered = true;
+        }
+    }
+}</code></pre>
+                </section>
+
+                <div class="navigation-buttons">
+                    <a href="../index.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver al Inicio
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p id="footer-copyright">© 2025 Adrián Espí Peña - Todos los derechos reservados</p>
+    </footer>
+
+    <!-- Scripts -->    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/ui-config.js"></script>
+    <script src="../assets/js/analytics.js"></script>
+    <script src="../assets/js/lazy-loading.js"></script>
+    <script src="../assets/js/search.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar UI desde config.json
+            updateUIFromConfig();
+            
+            // Inicializar resaltado de sintaxis
+            hljs.highlightAll();
+            
+            // Generar TOC automático
+            generateTOC();
+            
+            // Inicializar búsqueda
+            initializeSearch();
+        });
+    </script>
+</body>
+</html>

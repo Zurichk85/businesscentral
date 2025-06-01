@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> - Manuales BC</title>    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/manuales.css">
+    <link rel="stylesheet" href="../assets/css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css">
+    <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="logo" style="float: left;">
+                    <a href="../index.html">
+                        <img src="../assets/icons/favicon.png" alt="BC Logo">
+                        <span class="logo-text">BC Manuales</span>
+                    </a>
+                </li>
+                <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-book"></i> Manuales</a>
+                    <div class="dropdown-content" id="manuales-dropdown">
+                        <!-- Los enlaces se cargarÃ¡n dinÃ¡micamente desde config.json -->
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-tools"></i> MÃ¡s Recursos</a>
+                    <div class="dropdown-content" id="recursos-dropdown">
+                        <!-- Los recursos se cargarÃ¡n dinÃ¡micamente desde config.json -->
+                    </div>
+                </li>                <li><a href="../index.html#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                <li class="search-container" id="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Buscar...">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-results" id="search-results"></div>
+                </li>
+                <li class="dropdown" style="float: right;">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i> Conectar</a>
+                    <div class="dropdown-content" id="social-dropdown">
+                        <!-- Las redes sociales se cargarÃ¡n dinÃ¡micamente desde config.json -->
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="toc-container">
+                <div class="toc">
+                    <h3>Contenido</h3>
+                    <ul id="toc-list">
+                        <!-- La tabla de contenidos se generarÃ¡ automÃ¡ticamente -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1></h1>
+                <div class="breadcrumbs">
+                    <a href="../index.html">Inicio</a> &gt; 
+                    <a href="../index.html#manual1">Manuales</a> &gt; 
+                    <span></span>
+                </div>
+                
+                <section>
+                    <h2 id="seccion1">Primera SecciÃ³n</h2>
+                    <p>Contenido de la primera secciÃ³n...</p>
+                    
+                    <div class="note">
+                        <p><strong>Nota:</strong> Este es un ejemplo de nota informativa que puedes incluir en tus manuales.</p>
+                    </div>
+                    
+                    <h3>SubsecciÃ³n de ejemplo</h3>
+                    <p>Ejemplo de subsecciÃ³n con cÃ³digo:</p>
+                    
+                    <pre><code class="language-csharp">// Ejemplo de cÃ³digo en C#
+public class Ejemplo {
+    public string Propiedad { get; set; }
+    
+    public void Metodo() {
+        Console.WriteLine("Hola mundo");
+    }
+}</code></pre>
+                    
+                    <div class="warning">
+                        <p><strong>Advertencia:</strong> Este es un ejemplo de advertencia que puedes incluir en tus manuales.</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 id="seccion2">Segunda SecciÃ³n</h2>
+                    <p>Contenido de la segunda secciÃ³n...</p>
+                    
+                    <h3>Ejemplo con imagen</h3>
+                    <p>AsÃ­ puedes incluir una imagen en tu manual:</p>
+                    
+                    <div class="image-container">
+                        <img src="../assets/img/ejemplo.png" alt="Imagen de ejemplo">
+                        <p class="caption">Figura 1: DescripciÃ³n de la imagen</p>
+                    </div>
+                    
+                    <h3>Ejemplo con tabla</h3>
+                    <p>AsÃ­ puedes incluir una tabla en tu manual:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Columna 1</th>
+                                <th>Columna 2</th>
+                                <th>Columna 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dato 1</td>
+                                <td>Dato 2</td>
+                                <td>Dato 3</td>
+                            </tr>
+                            <tr>
+                                <td>Dato 4</td>
+                                <td>Dato 5</td>
+                                <td>Dato 6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                
+                <section>
+                    <h2 id="seccion3">Tercera SecciÃ³n</h2>
+                    <p>Contenido de la tercera secciÃ³n...</p>
+                    
+                    <h3>Lista de pasos</h3>
+                    <p>Ejemplo de una lista numerada de pasos:</p>
+                    
+                    <ol>
+                        <li>Primer paso</li>
+                        <li>Segundo paso</li>
+                        <li>Tercer paso</li>
+                    </ol>
+                    
+                    <h3>Ejemplo de botones</h3>
+                    <p>Puedes incluir botones para enlaces importantes:</p>
+                    
+                    <div class="button-container">
+                        <a href="#" class="btn"><i class="fas fa-download"></i> Descargar ejemplo</a>
+                        <a href="#" class="btn"><i class="fas fa-external-link-alt"></i> Ver documentaciÃ³n</a>
+                    </div>
+                    
+                    <div class="success">
+                        <p><strong>Ã‰xito:</strong> Este es un ejemplo de mensaje de Ã©xito que puedes incluir en tus manuales.</p>
+                    </div>
+                </section>
+                
+                <div class="author-info">
+                    <p><strong>Autor:</strong> <span id="author-name">Nombre del Autor</span></p>
+                    <p><strong>Ãšltima actualizaciÃ³n:</strong> <span id="last-updated">Fecha de actualizaciÃ³n</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <p><strong>BC Manuales</strong></p>
+                <p>Recursos para desarrolladores de Business Central</p>
+            </div>
+            <div class="social-links" id="footer-social-links">
+                <!-- Los enlaces sociales se cargarÃ¡n dinÃ¡micamente desde config.json -->
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; <span id="copyright-year">2025</span> <span id="copyright-name">AdriÃ¡n EspÃ­ PeÃ±a</span> - Todos los derechos reservados.</p>
+        </div>
+    </footer>    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/ui-config.js"></script>
+    <script src="../assets/js/search.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Inicializar highlight.js para resaltado de sintaxis
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+                
+                // AÃ±adir botÃ³n de copiar
+                const container = block.parentNode;
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'Copiar';
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(block.textContent);
+                    copyButton.textContent = 'Copiado!';
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copiar';
+                    }, 2000);
+                });
+                container.insertBefore(copyButton, block);
+            });
+            
+            // Generar tabla de contenidos
+            const headings = document.querySelectorAll('.content h2');
+            const tocList = document.getElementById('toc-list');
+            
+            headings.forEach(heading => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${heading.id}`;
+                a.textContent = heading.textContent;
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+            
+            // Actualizar nombre del autor y fecha desde config.json
+            fetch('../config.json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('author-name').textContent = data.author || 'Autor desconocido';
+                    document.getElementById('copyright-name').textContent = data.author || 'Autor desconocido';
+                    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+                    document.getElementById('last-updated').textContent = new Date().toLocaleDateString('es-ES');
+                })
+                .catch(error => console.error('Error al cargar la configuraciÃ³n:', error));
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,20 @@
+{
+  "name": "bc-manuales",
+  "version": "1.0.0",
+  "description": "Sitio web de manuales y recursos para Business Central",
+  "main": "index.html",  "scripts": {
+    "build-search": "node tools/generate-search-index.js",
+    "optimize-images": "node tools/optimize-images.js",
+    "convert-webp": "node tools/webp-converter.js",
+    "report": "node tools/project-report.js",
+    "serve": "npx http-server . -p 8080",
+    "dev": "npx live-server --port=8080 --open=/index.html"
+  },
+  "author": "Adrián Espí Peña",
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^24.0.0",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}

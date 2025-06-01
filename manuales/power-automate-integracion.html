@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integración Power Automate - BC Manuales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <style>
+        .workflow-diagram {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+        }
+        .power-automate-logo {
+            color: #0078d4;
+            font-size: 2rem;
+        }
+        .bc-logo {
+            color: #006bb3;
+            font-size: 2rem;
+        }
+        .integration-card {
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .integration-card:hover {
+            transform: translateY(-5px);
+        }
+        .code-snippet {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .trigger-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        .action-badge {
+            background: linear-gradient(45deg, #4ecdc4, #45b7aa);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-book-open me-2"></i>BC Manuales
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Manuales</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+                        <li class="breadcrumb-item active">Integración Power Automate</li>
+                    </ol>
+                </nav>
+
+                <div class="text-center mb-5">
+                    <h1 class="display-4 fw-bold">
+                        <i class="power-automate-logo fas fa-bolt me-3"></i>
+                        Integración Power Automate y Business Central
+                        <i class="bc-logo fas fa-building ms-3"></i>
+                    </h1>
+                    <p class="lead text-muted">Automatiza procesos empresariales integrando Power Automate con Business Central</p>
+                </div>
+
+                <div class="workflow-diagram text-center">
+                    <h3><i class="fas fa-project-diagram me-2"></i>Flujo de Integración</h3>
+                    <div class="row align-items-center mt-4">
+                        <div class="col-md-3">
+                            <i class="fas fa-database fa-3x mb-2"></i>
+                            <p>Business Central</p>
+                        </div>
+                        <div class="col-md-2">
+                            <i class="fas fa-arrow-right fa-2x"></i>
+                        </div>
+                        <div class="col-md-2">
+                            <i class="fas fa-bolt fa-3x mb-2"></i>
+                            <p>Power Automate</p>
+                        </div>
+                        <div class="col-md-2">
+                            <i class="fas fa-arrow-right fa-2x"></i>
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-cloud fa-3x mb-2"></i>
+                            <p>Servicios Externos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-8">
+                        <section id="introduccion">
+                            <h2><i class="fas fa-info-circle me-2"></i>Introducción</h2>
+                            <p>Power Automate es una herramienta de automatización que permite crear flujos de trabajo entre aplicaciones y servicios. La integración con Business Central permite automatizar procesos empresariales, sincronizar datos y crear notificaciones inteligentes.</p>
+                            
+                            <div class="alert alert-info">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                <strong>Beneficios:</strong> Automatización de procesos, reducción de errores manuales, integración con Office 365, y notificaciones en tiempo real.
+                            </div>
+                        </section>
+
+                        <section id="conectores" class="mt-5">
+                            <h2><i class="fas fa-plug me-2"></i>Conectores Disponibles</h2>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card integration-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><i class="fas fa-building me-2"></i>Business Central</h5>
+                                            <p class="card-text">Conector oficial para Business Central que permite crear, leer, actualizar y eliminar registros.</p>
+                                            <div class="trigger-badge">Trigger: Al crear registro</div>
+                                            <div class="action-badge">Acción: CRUD Operations</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card integration-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><i class="fas fa-envelope me-2"></i>Office 365 Outlook</h5>
+                                            <p class="card-text">Envía correos automáticos basados en eventos de Business Central.</p>
+                                            <div class="action-badge">Acción: Enviar email</div>
+                                            <div class="action-badge">Acción: Crear evento</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="configuracion" class="mt-5">
+                            <h2><i class="fas fa-cogs me-2"></i>Configuración Inicial</h2>
+                            
+                            <h4 class="mt-4">1. Habilitar API en Business Central</h4>
+                            <p>Primero, debes habilitar las APIs en Business Central:</p>
+                            
+                            <div class="code-snippet">
+                                <pre><code class="language-al">// En Business Central Admin Center
+// 1. Ir a Environments
+// 2. Seleccionar environment
+// 3. Ir a API Management
+// 4. Habilitar "Enable APIs"</code></pre>
+                            </div>
+
+                            <h4 class="mt-4">2. Configurar Autenticación</h4>
+                            <p>Configura la autenticación para Power Automate:</p>
+                            
+                            <pre><code class="language-json">{
+  "client_id": "tu-app-id",
+  "client_secret": "tu-client-secret",
+  "tenant_id": "tu-tenant-id",
+  "environment": "nombre-environment",
+  "company": "nombre-empresa"
+}</code></pre>
+
+                            <h4 class="mt-4">3. Crear Page Extension para Triggers</h4>
+                            <p>Extiende páginas para habilitar triggers automáticos:</p>
+
+                            <pre><code class="language-al">pageextension 50100 CustomerCardExt extends "Customer Card"
+{
+    trigger OnAfterGetRecord()
+    begin
+        // Lógica para trigger automático
+        CallPowerAutomateFlow();
+    end;
+
+    local procedure CallPowerAutomateFlow()
+    var
+        HttpClient: HttpClient;
+        HttpRequestMessage: HttpRequestMessage;
+        HttpResponseMessage: HttpResponseMessage;
+        RequestBody: Text;
+        FlowUrl: Text;
+    begin
+        FlowUrl := 'https://prod-xx.westeurope.logic.azure.com/workflows/xxx/triggers/manual/paths/invoke';
+        
+        RequestBody := CreateJsonPayload();
+        
+        HttpRequestMessage.Method := 'POST';
+        HttpRequestMessage.SetRequestUri(FlowUrl);
+        HttpRequestMessage.Content.WriteFrom(RequestBody);
+        HttpRequestMessage.Content.GetHeaders().Add('Content-Type', 'application/json');
+        
+        HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
+    end;
+
+    local procedure CreateJsonPayload() JsonPayload: Text
+    var
+        JsonObject: JsonObject;
+        Customer: Record Customer;
+    begin
+        Customer.Get(Rec."No.");
+        
+        JsonObject.Add('customerNo', Customer."No.");
+        JsonObject.Add('customerName', Customer.Name);
+        JsonObject.Add('email', Customer."E-Mail");
+        JsonObject.Add('creditLimit', Customer."Credit Limit (LCY)");
+        
+        JsonObject.WriteTo(JsonPayload);
+    end;
+}</code></pre>
+                        </section>
+
+                        <section id="ejemplos-flujos" class="mt-5">
+                            <h2><i class="fas fa-stream me-2"></i>Ejemplos de Flujos</h2>
+                            
+                            <h4 class="mt-4">Flujo 1: Notificación de Nueva Factura</h4>
+                            <div class="alert alert-success">
+                                <strong>Trigger:</strong> Cuando se crea una nueva factura de venta<br>
+                                <strong>Acción:</strong> Enviar email al director comercial
+                            </div>
+
+                            <pre><code class="language-json">{
+  "trigger": {
+    "type": "When a record is created (V3)",
+    "inputs": {
+      "environment": "Production",
+      "entityName": "salesInvoices"
+    }
+  },
+  "actions": {
+    "Send_email": {
+      "type": "Send an email (V2)",
+      "inputs": {
+        "to": "director@empresa.com",
+        "subject": "Nueva factura creada: @{triggerBody()['number']}",
+        "body": "Se ha creado una nueva factura por importe de @{triggerBody()['totalAmountIncludingTax']} €"
+      }
+    }
+  }
+}</code></pre>
+
+                            <h4 class="mt-4">Flujo 2: Sincronización con SharePoint</h4>
+                            <div class="alert alert-warning">
+                                <strong>Trigger:</strong> Cuando se actualiza un cliente<br>
+                                <strong>Acción:</strong> Actualizar lista de SharePoint
+                            </div>
+
+                            <pre><code class="language-json">{
+  "trigger": {
+    "type": "When a record is modified (V3)",
+    "inputs": {
+      "environment": "Production",
+      "entityName": "customers"
+    }
+  },
+  "actions": {
+    "Update_SharePoint_item": {
+      "type": "Update item",
+      "inputs": {
+        "site": "https://tuempresa.sharepoint.com/sites/ventas",
+        "list": "Clientes",
+        "id": "@{triggerBody()['id']}",
+        "Title": "@{triggerBody()['displayName']}",
+        "Email": "@{triggerBody()['email']}"
+      }
+    }
+  }
+}</code></pre>
+
+                            <h4 class="mt-4">Flujo 3: Aprobación de Pedidos</h4>
+                            <div class="alert alert-info">
+                                <strong>Trigger:</strong> Pedido superior a 10.000€<br>
+                                <strong>Acción:</strong> Crear aprobación en Teams
+                            </div>
+
+                            <pre><code class="language-al">// Codeunit para validar importes
+codeunit 50101 SalesOrderValidation
+{
+    [EventSubscriber(ObjectType::Table, Database::"Sales Header", 'OnAfterInsertEvent', '', false, false)]
+    local procedure OnAfterInsertSalesHeader(var Rec: Record "Sales Header")
+    begin
+        if (Rec."Document Type" = Rec."Document Type"::Order) and (Rec."Amount Including VAT" > 10000) then
+            TriggerApprovalFlow(Rec);
+    end;
+
+    local procedure TriggerApprovalFlow(SalesHeader: Record "Sales Header")
+    var
+        HttpClient: HttpClient;
+        HttpRequestMessage: HttpRequestMessage;
+        HttpResponseMessage: HttpResponseMessage;
+        JsonObject: JsonObject;
+        JsonText: Text;
+    begin
+        JsonObject.Add('orderNo', SalesHeader."No.");
+        JsonObject.Add('customerName', SalesHeader."Sell-to Customer Name");
+        JsonObject.Add('amount', SalesHeader."Amount Including VAT");
+        JsonObject.Add('requestorId', UserId);
+        
+        JsonObject.WriteTo(JsonText);
+        
+        HttpRequestMessage.Method := 'POST';
+        HttpRequestMessage.SetRequestUri('https://prod-xx.westeurope.logic.azure.com/workflows/approval/triggers/manual/paths/invoke');
+        HttpRequestMessage.Content.WriteFrom(JsonText);
+        
+        HttpClient.Send(HttpRequestMessage, HttpResponseMessage);
+    end;
+}</code></pre>
+                        </section>
+
+                        <section id="mejores-practicas" class="mt-5">
+                            <h2><i class="fas fa-star me-2"></i>Mejores Prácticas</h2>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-check-circle text-success me-2"></i>Hacer</h5>
+                                    <ul>
+                                        <li>Usar autenticación segura (OAuth 2.0)</li>
+                                        <li>Implementar manejo de errores</li>
+                                        <li>Validar datos antes de enviar</li>
+                                        <li>Usar filtros en triggers</li>
+                                        <li>Monitorear rendimiento</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-times-circle text-danger me-2"></i>Evitar</h5>
+                                    <ul>
+                                        <li>Loops infinitos en triggers</li>
+                                        <li>Envío masivo sin control</li>
+                                        <li>Credenciales hardcodeadas</li>
+                                        <li>Triggers en cada modificación</li>
+                                        <li>Falta de logs y auditoría</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="troubleshooting" class="mt-5">
+                            <h2><i class="fas fa-tools me-2"></i>Solución de Problemas</h2>
+                            
+                            <div class="accordion" id="troubleshootingAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAuth">
+                                            Error de Autenticación
+                                        </button>
+                                    </h2>
+                                    <div id="collapseAuth" class="accordion-collapse collapse show" data-bs-parent="#troubleshootingAccordion">
+                                        <div class="accordion-body">
+                                            <strong>Problema:</strong> "Unauthorized" o "403 Forbidden"<br>
+                                            <strong>Solución:</strong> Verificar permisos de API, renovar tokens, y validar configuración de Azure AD.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimeout">
+                                            Timeouts en Flujos
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTimeout" class="accordion-collapse collapse" data-bs-parent="#troubleshootingAccordion">
+                                        <div class="accordion-body">
+                                            <strong>Problema:</strong> Flujos que tardan demasiado en ejecutarse<br>
+                                            <strong>Solución:</strong> Optimizar consultas, usar filtros, y implementar procesamiento por lotes.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="sticky-top" style="top: 20px;">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-list me-2"></i>Índice</h5>
+                                </div>
+                                <div class="card-body">
+                                    <nav class="nav nav-pills flex-column">
+                                        <a class="nav-link" href="#introduccion">Introducción</a>
+                                        <a class="nav-link" href="#conectores">Conectores</a>
+                                        <a class="nav-link" href="#configuracion">Configuración</a>
+                                        <a class="nav-link" href="#ejemplos-flujos">Ejemplos de Flujos</a>
+                                        <a class="nav-link" href="#mejores-practicas">Mejores Prácticas</a>
+                                        <a class="nav-link" href="#troubleshooting">Solución de Problemas</a>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-download me-2"></i>Recursos</h5>
+                                </div>
+                                <div class="card-body">
+                                    <a href="#" class="btn btn-outline-primary btn-sm mb-2 w-100">
+                                        <i class="fas fa-download me-2"></i>Plantillas de Flujos
+                                    </a>
+                                    <a href="#" class="btn btn-outline-info btn-sm mb-2 w-100">
+                                        <i class="fas fa-code me-2"></i>Código de Ejemplo
+                                    </a>
+                                    <a href="#" class="btn btn-outline-success btn-sm w-100">
+                                        <i class="fas fa-book me-2"></i>Documentación MS
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 Adrián Espí Peña - Todos los derechos reservados</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Power Automate + Business Central Integration Guide</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-pascal.min.js"></script>
+    <script src="../assets/js/analytics.js"></script>
+    <script src="../assets/js/lazy-loading.js"></script>
+    
+    <script>
+        // Smooth scrolling para el índice
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight active section en el índice
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

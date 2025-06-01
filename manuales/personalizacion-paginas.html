@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalización de Páginas en Business Central - Manuales BC</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/manuales.css">
+    <link rel="stylesheet" href="../assets/css/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-light.min.css">
+    <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li class="logo" style="float: left;">
+                    <a href="../index.html">
+                        <img src="../assets/icons/favicon.png" alt="BC Logo">
+                        <span class="logo-text">BC Manuales</span>
+                    </a>
+                </li>
+                <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-book"></i> Manuales</a>
+                    <div class="dropdown-content" id="manuales-dropdown">
+                        <!-- Los enlaces se cargarán dinámicamente desde config.json -->
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-tools"></i> Más Recursos</a>
+                    <div class="dropdown-content" id="recursos-dropdown">
+                        <!-- Los recursos se cargarán dinámicamente desde config.json -->
+                    </div>
+                </li>
+                <li><a href="../index.html#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                <li class="search-container" id="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Buscar...">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-results" id="search-results"></div>
+                </li>
+                <li class="dropdown" style="float: right;">
+                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i> Conectar</a>
+                    <div class="dropdown-content" id="social-dropdown">
+                        <!-- Las redes sociales se cargarán dinámicamente desde config.json -->
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="toc-container">
+                <div class="toc">
+                    <h3>Contenido</h3>
+                    <ul id="toc-list">
+                        <!-- La tabla de contenidos se generará automáticamente -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content">
+                <h1>Personalización de Páginas en Business Central</h1>
+                <div class="breadcrumbs">
+                    <a href="../index.html">Inicio</a> &gt; 
+                    <a href="../index.html#manuales">Manuales</a> &gt; 
+                    <span>Personalización de Páginas</span>
+                </div>
+                
+                <section>
+                    <h2 id="introduccion">Introducción a la Personalización</h2>
+                    <p>Business Central permite personalizar las páginas de varias formas para adaptarlas a las necesidades específicas de tu organización. En este manual aprenderás las técnicas fundamentales para personalizar páginas usando AL (Application Language).</p>
+                    
+                    <div class="note">
+                        <p><strong>Nota:</strong> Este manual asume conocimientos básicos de programación AL y el entorno de desarrollo de Business Central.</p>
+                    </div>
+                    
+                    <h3>Tipos de Personalización</h3>
+                    <p>Existen varios niveles de personalización en Business Central:</p>
+                    
+                    <ul>
+                        <li><strong>Page Extension:</strong> Extender páginas existentes</li>
+                        <li><strong>Page Customization:</strong> Personalización a nivel de perfil</li>
+                        <li><strong>Nuevas Páginas:</strong> Crear páginas completamente nuevas</li>
+                        <li><strong>Modificación de Controles:</strong> Cambiar propiedades de campos y acciones</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2 id="page-extensions">Page Extensions</h2>
+                    <p>Las extensiones de página (Page Extension) te permiten agregar nuevos campos, acciones y modificar el comportamiento de páginas existentes sin alterar el código base.</p>
+                    
+                    <h3>Creando una Page Extension</h3>
+                    <p>Ejemplo básico de una extensión de página para la página Customer Card:</p>
+                    
+                    <pre><code class="language-al">pageextension 50100 "Customer Card Extension" extends "Customer Card"
+{
+    layout
+    {
+        addafter("Name")
+        {
+            field("Custom Field"; Rec."Custom Field")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Especifica un campo personalizado para el cliente';
+            }
+        }
+        
+        addlast(General)
+        {
+            group("Custom Information")
+            {
+                Caption = 'Información Personalizada';
+                
+                field("Marketing Preference"; Rec."Marketing Preference")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Especifica las preferencias de marketing del cliente';
+                }
+            }
+        }
+    }
+    
+    actions
+    {
+        addlast(Processing)
+        {
+            action("Custom Action")
+            {
+                Caption = 'Acción Personalizada';
+                Image = Action;
+                ApplicationArea = All;
+                
+                trigger OnAction()
+                begin
+                    // Lógica de la acción personalizada
+                    Message('Acción personalizada ejecutada para el cliente: %1', Rec.Name);
+                end;
+            }
+        }
+    }
+}</code></pre>
+                    
+                    <div class="warning">
+                        <p><strong>Advertencia:</strong> Asegúrate de que los campos personalizados existan en la extensión de tabla correspondiente antes de referenciarlos en la página.</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 id="controles-avanzados">Controles Avanzados</h2>
+                    <p>Business Central ofrece varios tipos de controles avanzados que puedes usar para mejorar la experiencia del usuario.</p>
+                    
+                    <h3>Factboxes Personalizados</h3>
+                    <p>Los Factboxes proporcionan información adicional contextual:</p>
+                    
+                    <pre><code class="language-al">pageextension 50101 "Customer Card Factbox Ext" extends "Customer Card"
+{
+    layout
+    {
+        addfirst(factboxes)
+        {
+            part("Customer Statistics"; "Customer Statistics FactBox")
+            {
+                ApplicationArea = All;
+                SubPageLink = "No." = field("No.");
+            }
+            
+            part("Custom Info"; "Custom Customer FactBox")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Customer No." = field("No.");
+            }
+        }
+    }
+}</code></pre>
+                    
+                    <h3>Controles de Lista</h3>
+                    <p>Ejemplo de personalización de una página de lista:</p>
+                    
+                    <pre><code class="language-al">pageextension 50102 "Customer List Extension" extends "Customer List"
+{
+    layout
+    {
+        addafter("Name")
+        {
+            field("Custom Field"; Rec."Custom Field")
+            {
+                ApplicationArea = All;
+                Visible = true;
+            }
+        }
+        
+        modify("Phone No.")
+        {
+            Visible = false; // Ocultar campo existente
+        }
+    }
+    
+    actions
+    {
+        addlast("F&unctions")
+        {
+            action("Bulk Update")
+            {
+                Caption = 'Actualización Masiva';
+                Image = UpdateDescription;
+                ApplicationArea = All;
+                
+                trigger OnAction()
+                var
+                    CustomerRec: Record Customer;
+                begin
+                    CurrPage.SetSelectionFilter(CustomerRec);
+                    if CustomerRec.FindSet() then
+                        repeat
+                            // Lógica de actualización masiva
+                        until CustomerRec.Next() = 0;
+                end;
+            }
+        }
+    }
+}</code></pre>
+                    
+                    <div class="success">
+                        <p><strong>Buena Práctica:</strong> Usa ApplicationArea para controlar la visibilidad de los campos según la licencia y configuración del usuario.</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 id="personalizacion-perfiles">Personalización por Perfiles</h2>
+                    <p>Business Central permite crear personalizaciones específicas para diferentes perfiles de usuario, adaptando la interfaz según el rol del usuario.</p>
+                    
+                    <h3>Configuración de Perfiles</h3>
+                    <p>Los perfiles permiten personalizar la experiencia del usuario:</p>
+                    
+                    <pre><code class="language-al">profile "Custom Sales Profile"
+{
+    Caption = 'Vendedor Personalizado';
+    RoleCenter = "Custom Sales Role Center";
+    Enabled = true;
+    
+    Customizations = "Sales Order Processor Customization";
+}</code></pre>
+                    
+                    <h3>Page Customization</h3>
+                    <p>Ejemplo de personalización específica para un perfil:</p>
+                    
+                    <pre><code class="language-al">pagecustomization "Sales Order Customization" customizes "Sales Order"
+{
+    layout
+    {
+        modify("Sell-to Customer Name")
+        {
+            Visible = true;
+            Importance = Promoted;
+        }
+        
+        modify("External Document No.")
+        {
+            Visible = false;
+        }
+        
+        moveafter("Sell-to Customer Name"; "Document Date")
+    }
+    
+    actions
+    {
+        modify("Release")
+        {
+            Visible = false;
+        }
+    }
+}</code></pre>
+                    
+                    <div class="note">
+                        <p><strong>Nota:</strong> Las personalizaciones por perfil no requieren modificar el código AL y pueden aplicarse desde la interfaz de usuario.</p>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2 id="mejores-practicas">Mejores Prácticas</h2>
+                    <p>Para mantener la calidad y mantenibilidad de tus personalizaciones, sigue estas mejores prácticas:</p>
+                    
+                    <h3>Convenciones de Nombres</h3>
+                    <ul>
+                        <li>Usa prefijos consistentes para tus objetos (ej: 50100-50199 para Customer)</li>
+                        <li>Nombres descriptivos para campos y acciones</li>
+                        <li>Documenta el propósito de cada personalización</li>
+                    </ul>
+                    
+                    <h3>Rendimiento</h3>
+                    <ol>
+                        <li>Minimiza el número de campos visibles en las listas</li>
+                        <li>Usa FlowFields para cálculos complejos</li>
+                        <li>Implementa filtros apropiados en SubPages</li>
+                        <li>Considera el impacto en la base de datos</li>
+                    </ol>
+                    
+                    <h3>Mantenibilidad</h3>
+                    <p>Ejemplo de código bien documentado:</p>
+                    
+                    <pre><code class="language-al">pageextension 50103 "Sales Invoice Ext" extends "Sales Invoice"
+{
+    layout
+    {
+        // Grupo para información de envío personalizada
+        // Requerimiento: Ticket #12345 - Mostrar información de envío
+        addlast(General)
+        {
+            group("Shipping Information")
+            {
+                Caption = 'Información de Envío';
+                
+                field("Shipping Method Code"; Rec."Shipping Method Code")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Especifica el método de envío para esta factura';
+                    
+                    trigger OnValidate()
+                    begin
+                        // Actualizar campos relacionados automáticamente
+                        UpdateShippingDetails();
+                    end;
+                }
+            }
+        }
+    }
+    
+    local procedure UpdateShippingDetails()
+    begin
+        // Lógica para actualizar detalles de envío
+        // Basado en el método de envío seleccionado
+    end;
+}</code></pre>
+                    
+                    <div class="button-container">
+                        <a href="https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-page-extension-object" class="btn"><i class="fas fa-external-link-alt"></i> Documentación Oficial</a>
+                        <a href="https://github.com/microsoft/AL" class="btn"><i class="fas fa-download"></i> Ejemplos en GitHub</a>
+                    </div>
+                </section>
+                
+                <div class="author-info">
+                    <p><strong>Autor:</strong> <span id="author-name">Adrián Espí Peña</span></p>
+                    <p><strong>Última actualización:</strong> <span id="last-updated"></span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <p><strong>BC Manuales</strong></p>
+                <p>Recursos para desarrolladores de Business Central</p>
+            </div>
+            <div class="social-links" id="footer-social-links">
+                <!-- Los enlaces sociales se cargarán dinámicamente desde config.json -->
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; <span id="copyright-year">2025</span> <span id="copyright-name">Adrián Espí Peña</span> - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/ui-config.js"></script>
+    <script src="../assets/js/analytics.js"></script>
+    <script src="../assets/js/search.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Inicializar highlight.js para resaltado de sintaxis
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+                
+                // Añadir botón de copiar
+                const container = block.parentNode;
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'Copiar';
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(block.textContent);
+                    copyButton.textContent = 'Copiado!';
+                    
+                    // Track copy event
+                    if (typeof trackEvent === 'function') {
+                        trackEvent('code_copied', {
+                            manual: 'personalizacion-paginas',
+                            language: block.className.replace('language-', '')
+                        });
+                    }
+                    
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copiar';
+                    }, 2000);
+                });
+                container.insertBefore(copyButton, block);
+            });
+            
+            // Generar tabla de contenidos
+            const headings = document.querySelectorAll('.content h2');
+            const tocList = document.getElementById('toc-list');
+            
+            headings.forEach(heading => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${heading.id}`;
+                a.textContent = heading.textContent;
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+            
+            // Actualizar nombre del autor y fecha desde config.json
+            fetch('../config.json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('author-name').textContent = data.author || 'Autor desconocido';
+                    document.getElementById('copyright-name').textContent = data.author || 'Autor desconocido';
+                    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+                    document.getElementById('last-updated').textContent = new Date().toLocaleDateString('es-ES');
+                })
+                .catch(error => console.error('Error al cargar la configuración:', error));
+                
+            // Track manual view
+            if (typeof trackEvent === 'function') {
+                trackEvent('manual_view', {
+                    manual: 'personalizacion-paginas',
+                    title: 'Personalización de Páginas en Business Central'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
