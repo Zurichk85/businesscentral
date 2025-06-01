@@ -1,21 +1,307 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+/* Tabla de contenidos */
+.toc {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius-md);
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-left: 4px solid var(--primary-color);
 }
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+
+.toc-header {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 1.1rem;
 }
+
+.toc ul {
+    list-style-type: none;
+    padding-left: 0.5rem;
+    margin-bottom: 0;
+}
+
+.toc ul li {
+    margin-bottom: 0.8rem;
+}
+
+.toc ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    display: block;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-sm);
+}
+
+.toc ul li a:hover {
+    background-color: rgba(0, 120, 212, 0.1);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.toc ul li a i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+/* Cajas de información y consejos */
+.info-box, .tip-box {
+    margin: 1.5rem 0;
+    padding: 1.2rem;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: flex-start;
+}
+
+.info-box {
+    background-color: rgba(0, 120, 212, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.tip-box {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid var(--success-color);
+}
+
+.info-box i, .tip-box i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.info-box i {
+    color: var(--primary-color);
+}
+
+.tip-box i {
+    color: var(--success-color);
+}
+
+.code-inline {
+    font-family: 'Fira Code', monospace;
+    background-color: #f1f1f1;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+/* Bloques de código mejorados */
+.code-block {
+    margin: 1.5rem 0;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e9ecef;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.language-badge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.copy-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.copy-btn:hover {
+    color: var(--primary-color);
+}
+
+.code-block pre {
+    margin: 0;
+    border-left: none;
+    border-radius: 0;
+}
+
+/* Galería de imágenes */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.image-container {
+    flex: 1 1 300px;
+    max-width: 100%;
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+.img-responsive:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.image-caption {
+    text-align: center;
+    margin-top: 0.8rem;
+    font-style: italic;
+    color: var(--text-light);
+}
+
 h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+h2 {
+    font-size: 1.6rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+}
+
+h3 {
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+}
+
+p {
+    margin-bottom: 1.2rem;
+}
+
+pre {
+    background: var(--code-bg);
+    padding: 1.2rem;
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid var(--primary-color);
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    box-shadow: var(--shadow-sm);
+}
+
+code {
+    font-family: 'Fira Code', Consolas, monospace;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.language-csharp {
     color: #333;
 }
-pre {
-    background: #f4f4f4;
-    padding: 10px;
-    border: 1px solid #ddd;
-    overflow-x: auto;
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-md);
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
 }
-code {
-    font-family: Consolas, monospace;
+
+img:hover {
+    transform: scale(1.01);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    pre {
+        padding: 1rem;
+    }
+}
+
+/* Estilos para resaltar partes importantes del código */
+.code-highlight {
+    background-color: var(--code-highlight);
+    padding: 0.2rem;
+    border-radius: 3px;
+}
+
+/* Navegación de página */
+.page-nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--code-border);
+}
+
+.page-nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: var(--transition-fast);
+}
+
+.page-nav a:hover {
+    color: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+.page-nav a:first-child:hover {
+    transform: translateX(-5px);
+}
+
+/* Estilos para tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+table th,
+table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--code-border);
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: var(--bg-light);
+}
+
+table tr:hover {
+    background-color: var(--code-highlight);
 }
