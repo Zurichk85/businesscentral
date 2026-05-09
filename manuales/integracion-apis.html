@@ -12,8 +12,9 @@
     <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <header>
-        <nav>
+        <nav role="navigation" aria-label="Menú principal">
             <ul>
                 <li class="logo" style="float: left;">
                     <a href="../index.html">
@@ -23,25 +24,25 @@
                 </li>
                 <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-book"></i> Manuales</a>
+                    <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-book" aria-hidden="true"></i> Manuales</button>
                     <div class="dropdown-content" id="manuales-dropdown">
                         <!-- Los enlaces se cargarán dinámicamente desde config.json -->
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-tools"></i> Más Recursos</a>
+                    <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-tools" aria-hidden="true"></i> Más Recursos</button>
                     <div class="dropdown-content" id="recursos-dropdown">
                         <!-- Los recursos se cargarán dinámicamente desde config.json -->
                     </div>
                 </li>
                 <li><a href="../index.html#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
                 <li class="search-container" id="search-container">
-                    <input type="text" class="search-input" id="search-input" placeholder="Buscar...">
+                    <input type="text" class="search-input" id="search-input" placeholder="Buscar..." aria-label="Buscar manuales">
                     <i class="fas fa-search search-icon"></i>
                     <div class="search-results" id="search-results"></div>
                 </li>
                 <li class="dropdown" style="float: right;">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i> Conectar</a>
+                    <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-user-circle" aria-hidden="true"></i> Conectar</button>
                     <div class="dropdown-content" id="social-dropdown">
                         <!-- Las redes sociales se cargarán dinámicamente desde config.json -->
                     </div>
@@ -50,7 +51,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <div class="manual-header">
             <h1>Integración con APIs REST en Business Central</h1>
             <p class="manual-description">Guía completa para integrar Business Central con APIs REST externas</p>

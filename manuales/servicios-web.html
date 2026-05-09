@@ -10,8 +10,9 @@
     <link rel="icon" href="../assets/icons/favicon.png" type="image/png">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido</a>
     <header>
-        <nav>
+        <nav role="navigation" aria-label="Menú principal">
             <ul>
                 <li class="logo" style="float: left;">
                     <a href="../index.html">
@@ -20,7 +21,7 @@
                     </a>                </li>
                 <li><a href="../index.html"><i class="fas fa-home"></i> Inicio</a></li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-book"></i> Manuales</a>
+                    <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-book" aria-hidden="true"></i> Manuales</button>
                     <div class="dropdown-content">
                         <a href="servicios-web.html" class="active"><i class="fas fa-code"></i> Consumir Servicio Web desde .Net</a>
                         <a href="#"><i class="fas fa-cogs"></i> Manual 2</a>
@@ -28,26 +29,26 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-tools"></i> Más Recursos</a>
+                    <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-tools" aria-hidden="true"></i> Más Recursos</button>
                     <div class="dropdown-content">
-                        <a href="https://rendbctrans.onrender.com/" target="_blank"><i class="fas fa-language"></i> Traductor BC</a>
+                        <a href="https://rendbctrans.onrender.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-language"></i> Traductor BC</a>
                     </div>
                 </li>                <li><a href="../index.html#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
                 <li class="search-container" id="search-container">
-                    <input type="text" class="search-input" id="search-input" placeholder="Buscar...">
+                    <input type="text" class="search-input" id="search-input" placeholder="Buscar..." aria-label="Buscar manuales">
                     <i class="fas fa-search search-icon"></i>
                     <div class="search-results" id="search-results"></div>
                 </li>
                 <li class="dropdown" style="float: right;">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i> Conectar</a>
+                    <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-user-circle" aria-hidden="true"></i> Conectar</button>
                     <div class="dropdown-content">
-                        <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank">
+                        <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-linkedin"></i> LinkedIn
                         </a>
-                        <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank">
+                        <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-youtube"></i> YouTube
                         </a>
-                        <a href="https://zurichk.github.io/" target="_blank">
+                        <a href="https://zurichk.github.io/" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-user"></i> CV
                         </a>
                     </div>
@@ -55,7 +56,8 @@
             </ul>
         </nav>    </header>
     
-    <div class="container">
+    <main id="main-content">
+        <div class="container">
         <h1>Manual de Integración con Business Central desde .NET</h1>
 
         <div class="toc">
@@ -307,9 +309,9 @@ namespace TestParaManual
                 <p>Recursos para desarrolladores de Business Central</p>
             </div>
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
             </div>
         </div>
         <div class="copyright">

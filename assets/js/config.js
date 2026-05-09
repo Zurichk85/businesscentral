@@ -11,10 +11,23 @@ class SiteConfig {
 
   async load() {
     try {
-      const response = await fetch('/config.json');
-      if (!response.ok) {
-        throw new Error(`Error cargando configuración: ${response.status}`);
+      // Intentar cargar config.json desde varias rutas (soporta subdirectorios y hosting estático)
+      const possiblePaths = ['/config.json', 'config.json', '../config.json'];
+      let response = null;
+
+      for (const p of possiblePaths) {
+        try {
+          response = await fetch(p);
+          if (response && response.ok) break;
+        } catch (e) {
+          // Ignorar errores y probar la siguiente ruta
+        }
       }
+
+      if (!response || !response.ok) {
+        throw new Error('No se pudo cargar config.json desde rutas conocidas');
+      }
+
       this.config = await response.json();
       this.loaded = true;
       console.log('Configuración cargada con éxito');
@@ -69,5 +82,5 @@ class SiteConfig {
   }
 }
 
-// Exportar la instancia para uso global
-const siteConfig = new SiteConfig();
+// Exportar la instancia para uso global (asegurar accesibilidad desde otros scripts)
+window.siteConfig = new SiteConfig();

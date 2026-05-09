@@ -10,8 +10,27 @@ let searchReady = false;
 // Inicializar el sistema de búsqueda
 async function initSearch() {
     try {
-        // Cargar el índice de búsqueda
-        const response = await fetch('../search-index.json');
+        // Intentar cargar el índice de búsqueda desde varias rutas posibles
+        const possiblePaths = [
+            '/search-index.json',
+            'search-index.json',
+            '../search-index.json'
+        ];
+
+        let response = null;
+        for (const p of possiblePaths) {
+            try {
+                response = await fetch(p);
+                if (response && response.ok) break;
+            } catch (e) {
+                // Ignorar y probar la siguiente ruta
+            }
+        }
+
+        if (!response || !response.ok) {
+            throw new Error('No se pudo cargar search-index.json desde rutas conocidas');
+        }
+
         searchIndex = await response.json();
         searchReady = true;
         
@@ -35,12 +54,14 @@ async function initSearch() {
                 displayResults(results, searchResults);
             });
             
-            // Ocultar resultados al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                if (!searchContainer.contains(e.target)) {
-                    searchResults.style.display = 'none';
+                // Ocultar resultados al hacer clic fuera (proteger si no existe el contenedor)
+                if (searchContainer) {
+                    document.addEventListener('click', (e) => {
+                        if (!searchContainer.contains(e.target)) {
+                            searchResults.style.display = 'none';
+                        }
+                    });
                 }
-            });
             
             // Navegación con teclado en resultados
             searchInput.addEventListener('keydown', (e) => {

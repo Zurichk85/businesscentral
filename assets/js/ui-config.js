@@ -115,3 +115,26 @@ function updateRecursosNavigation() {
         }
     });
 }
+
+// Inicializar UI desde configuración si está disponible
+function initUIConfig() {
+    if (window.siteConfig) {
+        // Cargar configuración y actualizar UI cuando esté lista
+        siteConfig.load().then(() => {
+            try {
+                updateUIFromConfig();
+            } catch (e) {
+                console.error('Error actualizando UI desde configuración:', e);
+            }
+        });
+    } else {
+        console.warn('siteConfig no está disponible en window');
+    }
+}
+
+// Ejecutar inicialización si el DOM ya está listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUIConfig);
+} else {
+    initUIConfig();
+}

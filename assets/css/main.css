@@ -38,6 +38,33 @@
   --transition-slow: all 0.4s ease;
 }
 
+/* Skip link (Saltar al contenido) */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    z-index: 2000;
+}
+
+/* Focus visible improvements for accessible navigation */
+a:focus, button:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
 body {
     font-family: 'Poppins', Arial, sans-serif;
     margin: 0;
@@ -89,6 +116,23 @@ nav ul li a {
     font-weight: 500;
     transition: var(--transition-fast);
     border-radius: var(--border-radius-sm);
+}
+
+/* Asegurar que los botones de dropdown hereden estilo del enlace */
+nav ul li .dropbtn {
+    color: white;
+    background: transparent;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: block;
+    border-radius: var(--border-radius-sm);
+}
+
+nav ul li .dropbtn:focus {
+    outline: 2px solid rgba(255,255,255,0.2);
+    outline-offset: 2px;
 }
 
 nav ul li a:hover, .dropdown:hover .dropbtn {

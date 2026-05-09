@@ -94,23 +94,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const nav = document.querySelector('nav');
         if (!nav) return;
 
-        // Crear botón de menú móvil si no existe
+        // Crear botón de menú móvil si no existe (usar elemento button accesible)
         if (!document.querySelector('.mobile-menu-btn')) {
-            const mobileMenuBtn = document.createElement('div');
+            const mobileMenuBtn = document.createElement('button');
             mobileMenuBtn.className = 'mobile-menu-btn';
-            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            
+            mobileMenuBtn.setAttribute('aria-label', 'Abrir menú');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+
             mobileMenuBtn.addEventListener('click', function() {
-                nav.classList.toggle('mobile-menu-open');
-                
+                const open = nav.classList.toggle('mobile-menu-open');
                 // Cambiar icono
-                if (nav.classList.contains('mobile-menu-open')) {
-                    this.innerHTML = '<i class="fas fa-times"></i>';
+                if (open) {
+                    this.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+                    this.setAttribute('aria-expanded', 'true');
                 } else {
-                    this.innerHTML = '<i class="fas fa-bars"></i>';
+                    this.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+                    this.setAttribute('aria-expanded', 'false');
                 }
             });
-            
+
             // Insertar el botón antes del primer elemento del menú
             const firstListItem = nav.querySelector('ul li:first-child');
             if (firstListItem) {
@@ -128,6 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         this.parentNode.classList.toggle('dropdown-open');
+                        // Mantener atributo aria-expanded sincronizado
+                        const expanded = this.getAttribute('aria-expanded') === 'true';
+                        this.setAttribute('aria-expanded', (!expanded).toString());
                     }
                 });
             }
@@ -176,4 +182,70 @@ function initializeToc() {
 // Inicializar la tabla de contenidos si existe
 if (document.querySelector('.toc')) {
     initializeToc();
+}
+
+// Inicializar accesibilidad para dropdowns: manejo de teclado y cierre al hacer clic fuera
+function initializeDropdownAccessibility() {
+    const dropbtns = document.querySelectorAll('.dropbtn');
+
+    dropbtns.forEach(btn => {
+        // Asegurar atributos ARIA
+        if (!btn.hasAttribute('aria-haspopup')) btn.setAttribute('aria-haspopup', 'true');
+        if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+
+        // Click toggles already manejado; añadir soporte de teclado
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                btn.click();
+            } else if (e.key === 'Escape') {
+                btn.setAttribute('aria-expanded', 'false');
+                const parent = btn.parentNode;
+                if (parent && parent.classList) parent.classList.remove('dropdown-open');
+                btn.focus();
+            }
+        });
+    });
+
+    // Cerrar dropdowns al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-open').forEach(el => {
+                el.classList.remove('dropdown-open');
+                const b = el.querySelector('.dropbtn');
+                if (b) b.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+}
+
+// Ejecutar inicialización de accesibilidad
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeDropdownAccessibility);
+} else {
+    initializeDropdownAccessibility();
+}
+
+// Marcar enlace de navegación actual con aria-current
+function markCurrentNavLink() {
+    const links = document.querySelectorAll('nav a');
+    const path = window.location.pathname.split('/').pop();
+    links.forEach(a => {
+        try {
+            const href = a.getAttribute('href');
+            if (!href) return;
+            const hrefFile = href.split('/').pop();
+            if (hrefFile === path || (href === '#' && path === 'index.html') || (href === window.location.hash)) {
+                a.setAttribute('aria-current', 'page');
+            } else {
+                a.removeAttribute('aria-current');
+            }
+        } catch (e) {}
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', markCurrentNavLink);
+} else {
+    markCurrentNavLink();
 }
