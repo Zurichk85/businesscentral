@@ -57,6 +57,3 @@ tmp/
 temp/
 *.tmp
 *.temp
-
-# Search index (can be regenerated)
-search-index.json

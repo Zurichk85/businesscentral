@@ -97,9 +97,9 @@ Toda la configuración del sitio se encuentra en `config.json`:
 {
   "siteName": "BC Manuales",
   "siteDescription": "Manuales y recursos para desarrolladores de Business Central",
-  "author": "Adrián Espí Peña",
+  "author": "Adrián Espí",
   "version": "1.0.0",
-  "copyright": "2025 Adrián Espí Peña - Todos los derechos reservados",
+  "copyright": "2025 Adrián Espí - Todos los derechos reservados",
   "socialLinks": {
     "linkedin": "...",
     "youtube": "...",
@@ -171,7 +171,7 @@ El sitio es completamente estático y puede desplegarse en cualquier servidor we
 
 ## 📄 Licencia
 
-© 2025 Adrián Espí Peña - Todos los derechos reservados
+© 2025 Adrián Espí - Todos los derechos reservados
 
 ## 🤝 Contribución
 

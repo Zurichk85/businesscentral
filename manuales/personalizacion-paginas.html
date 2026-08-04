@@ -16,7 +16,7 @@
     <header>
         <nav role="navigation" aria-label="Menú principal">
             <ul>
-                <li class="logo" style="float: left;">
+                <li class="logo">
                     <a href="../index.html">
                         <img src="../assets/icons/favicon.png" alt="BC Logo">
                         <span class="logo-text">BC Manuales</span>
@@ -26,13 +26,17 @@
                 <li class="dropdown">
                     <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-book" aria-hidden="true"></i> Manuales</button>
                     <div class="dropdown-content" id="manuales-dropdown">
-                        <!-- Los enlaces se cargarán dinámicamente desde config.json -->
+                        <a href="servicios-web.html"><i class="fas fa-code"></i> Consumir Servicio Web desde .Net</a>
+                        <a href="integracion-apis.html"><i class="fas fa-exchange-alt"></i> Integración con APIs REST</a>
+                        <a href="personalizacion-paginas.html"><i class="fas fa-paint-brush"></i> Personalización de Páginas</a>
+                        <a href="power-automate-integracion.html"><i class="fas fa-bolt"></i> Integración Power Automate</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-tools" aria-hidden="true"></i> Más Recursos</button>
                     <div class="dropdown-content" id="recursos-dropdown">
-                        <!-- Los recursos se cargarán dinámicamente desde config.json -->
+                        <a href="https://rendbctrans.onrender.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-language"></i> Traductor BC</a>
+                        <a href="https://smallpdf.com/es/pdf-a-word" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> Convertidor PDF a Word</a>
                     </div>
                 </li>
                 <li><a href="../index.html#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
@@ -41,10 +45,13 @@
                     <i class="fas fa-search search-icon"></i>
                     <div class="search-results" id="search-results"></div>
                 </li>
-                <li class="dropdown" style="float: right;">
+                <li class="dropdown">
                     <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-user-circle" aria-hidden="true"></i> Conectar</button>
                     <div class="dropdown-content" id="social-dropdown">
-                        <!-- Las redes sociales se cargarán dinámicamente desde config.json -->
+                        <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://zurichk.github.io/" target="_blank" rel="noopener noreferrer"><i class="fas fa-user"></i> CV</a>
+                        <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </li>
             </ul>
@@ -357,7 +364,10 @@
                 <p>Recursos para desarrolladores de Business Central</p>
             </div>
             <div class="social-links" id="footer-social-links">
-                <!-- Los enlaces sociales se cargarán dinámicamente desde config.json -->
+                <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                <a href="https://zurichk.github.io/" target="_blank" rel="noopener noreferrer"><i class="fas fa-user"></i></a>
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
             </div>
         </div>
         <div class="copyright">
@@ -399,19 +409,6 @@
                     }, 2000);
                 });
                 container.insertBefore(copyButton, block);
-            });
-            
-            // Generar tabla de contenidos
-            const headings = document.querySelectorAll('.content h2');
-            const tocList = document.getElementById('toc-list');
-            
-            headings.forEach(heading => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `#${heading.id}`;
-                a.textContent = heading.textContent;
-                li.appendChild(a);
-                tocList.appendChild(li);
             });
             
             // Actualizar nombre del autor y fecha desde config.json

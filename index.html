@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manuales de Business Central</title>    <link rel="stylesheet" href="assets/css/main.css">
+    <meta name="description" content="Manuales y recursos técnicos para desarrolladores de Microsoft Dynamics 365 Business Central">
+    <title>Manuales de Business Central</title>
+    <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="assets/icons/favicon.png" type="image/png">
 </head>
 <body>
     <header>
-        <nav>
-                <a href="#main-content" class="skip-link">Saltar al contenido</a>
+        <nav role="navigation" aria-label="Menú principal">
             <ul>
-                <li class="logo" style="float: left;">
-                    <img src="assets/icons/favicon.png" alt="BC Logo">
-                    <span class="logo-text">BC Manuales</span>
-                </li>                <li><a href="#home"><i class="fas fa-home"></i> Inicio</a></li>
+                <li class="logo">
+                    <a href="#home">
+                        <img src="assets/icons/favicon.png" alt="BC Logo">
+                        <span class="logo-text">BC Manuales</span>
+                    </a>
+                </li>
+                <li><a href="#home"><i class="fas fa-home" aria-hidden="true"></i> Inicio</a></li>
                 <li class="dropdown">
                     <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-book" aria-hidden="true"></i> Manuales</button>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" id="manuales-dropdown">
                         <a href="manuales/servicios-web.html"><i class="fas fa-code"></i> Consumir Servicio Web desde .Net</a>
-                        <a href="#manual2"><i class="fas fa-cogs"></i> Manual 2</a>
-                        <a href="#manual3"><i class="fas fa-tasks"></i> Manual 3</a>
+                        <a href="manuales/integracion-apis.html"><i class="fas fa-exchange-alt"></i> Integración con APIs REST</a>
+                        <a href="manuales/personalizacion-paginas.html"><i class="fas fa-paint-brush"></i> Personalización de Páginas</a>
+                        <a href="manuales/power-automate-integracion.html"><i class="fas fa-bolt"></i> Integración Power Automate</a>
                     </div>
                 </li>
                 <li class="dropdown">
                     <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-tools" aria-hidden="true"></i> Más Recursos</button>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content" id="recursos-dropdown">
                         <a href="https://rendbctrans.onrender.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-language"></i> Traductor BC</a>
+                        <a href="https://smallpdf.com/es/pdf-a-word" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> Convertidor PDF a Word</a>
                     </div>
-                </li>                <li><a href="#about"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                </li>
+                <li><a href="#about"><i class="fas fa-info-circle" aria-hidden="true"></i> Acerca de</a></li>
                 <li class="search-container" id="search-container">
                     <input type="text" class="search-input" id="search-input" placeholder="Buscar..." aria-label="Buscar manuales">
-                    <i class="fas fa-search search-icon"></i>
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
                     <div class="search-results" id="search-results"></div>
                 </li>
-                <li class="dropdown" style="float: right;">
+                <li class="dropdown">
                     <button class="dropbtn" aria-haspopup="true" aria-expanded="false" type="button"><i class="fas fa-user-circle" aria-hidden="true"></i> Conectar</button>
-                    <div class="dropdown-content">
-                        <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-youtube"></i> YouTube
-                        </a>
-                        <a href="https://zurichk.github.io/" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-user"></i> CV
-                        </a>
+                    <div class="dropdown-content" id="social-dropdown">
+                        <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="https://zurichk.github.io/" target="_blank" rel="noopener noreferrer"><i class="fas fa-user"></i> CV</a>
+                        <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </li>
             </ul>
         </nav>
     </header>
+
     <main id="main-content">
         <section id="home" class="text-center">
             <h1>Bienvenido a los Manuales de Business Central</h1>
@@ -62,47 +66,40 @@
                     <div class="card-content">
                         <h3 class="card-title">Manuales de Desarrollo</h3>
                         <p class="card-text">Guías técnicas para desarrolladores que trabajan con Business Central.</p>
-                        <a href="#manual1" class="btn">Ver Manuales</a>
+                        <a href="#manual1" class="btn"><i class="fas fa-book-open" aria-hidden="true"></i> Ver Manuales</a>
                     </div>
                 </div>
-                  <div class="card">
-                    <img data-src="https://learn.microsoft.com/es-es/dynamics365/business-central/developer/media/bc-al-add-package/add-package-command.png" alt="Business Central API" class="card-img lazy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGNUY1RjUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q2FyZ2FuZG8uLi48L3RleHQ+PC9zdmc+">
+                <div class="card">
+                    <img data-src="assets/img/bc y apis.webp" alt="Business Central API" class="card-img lazy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGNUY1RjUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q2FyZ2FuZG8uLi48L3RleHQ+PC9zdmc+">
                     <div class="card-content">
                         <h3 class="card-title">Integración con APIs</h3>
                         <p class="card-text">Aprende a conectar tus aplicaciones con Business Central mediante APIs.</p>
-                        <a href="manuales/integracion-apis.html" class="btn">Ver Guías</a>
+                        <a href="manuales/integracion-apis.html" class="btn"><i class="fas fa-plug" aria-hidden="true"></i> Ver Guías</a>
                     </div>
                 </div>
-                  <div class="card">
+                <div class="card">
                     <img data-src="https://learn.microsoft.com/es-es/dynamics365/business-central/media/growth-understand-tables/all-tables.png" alt="Recursos" class="card-img lazy" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNGNUY1RjUiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iIGZpbGw9IiM5OTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+Q2FyZ2FuZG8uLi48L3RleHQ+PC9zdmc+">
                     <div class="card-content">
                         <h3 class="card-title">Recursos Adicionales</h3>
                         <p class="card-text">Herramientas y recursos complementarios para tu desarrollo.</p>
-                        <a href="#resources" class="btn">Ver Recursos</a>
+                        <a href="#resources" class="btn"><i class="fas fa-toolbox" aria-hidden="true"></i> Ver Recursos</a>
                     </div>
                 </div>
             </div>
-        </section>        <section id="manual1">
+        </section>
+
+        <section id="manual1">
             <h2>Manuales Disponibles</h2>
             <p class="mb-3">Explora nuestros manuales técnicos para desarrolladores de Business Central:</p>
-            
-            <div id="manuales-container">
+            <div id="manuales-container" class="card-container">
                 <!-- Los manuales se cargarán dinámicamente desde config.json -->
             </div>
         </section>
 
         <section id="resources">
             <h2>Recursos Adicionales</h2>
-            <div class="mb-3">
-                <h3><i class="fas fa-language"></i> Traductor de Business Central</h3>
-                <p>Herramienta para traducir textos y etiquetas de Business Central al español:</p>
-                <a href="https://rendbctrans.onrender.com/" class="btn" target="_blank" rel="noopener noreferrer">Ir al Traductor</a>
-            </div>
-            
-            <div class="mb-3">
-                <h3><i class="fas fa-book"></i> Documentación Oficial</h3>
-                <p>Enlaces a la documentación oficial de Microsoft para Business Central:</p>
-                <a href="https://learn.microsoft.com/es-es/dynamics365/business-central/dev-itpro/" class="btn" target="_blank" rel="noopener noreferrer">Documentación para Desarrolladores</a>
+            <div id="recursos-grid" class="card-container">
+                <!-- Los recursos se cargarán dinámicamente desde config.json -->
             </div>
         </section>
 
@@ -111,26 +108,32 @@
             <p>Este proyecto recopila manuales técnicos y recursos para desarrolladores que trabajan con Microsoft Dynamics 365 Business Central.</p>
             <p>El objetivo es compartir conocimiento y facilitar el aprendizaje de las tecnologías relacionadas con este ERP.</p>
             <p class="mb-3">Desarrollado por Adrián Espí Peña, consultor y desarrollador especializado en Business Central.</p>
-            
             <div class="text-center">
-                <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" class="btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> Conectar en LinkedIn</a>
-                <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" class="btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> Canal de YouTube</a>
+                <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" class="btn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i> Conectar en LinkedIn</a>
+                <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i> Canal de YouTube</a>
             </div>
         </section>
-    </main>    <footer>
+    </main>
+
+    <footer>
         <div class="footer-content">
             <div>
                 <p><strong>BC Manuales</strong></p>
                 <p>Recursos para desarrolladores de Business Central</p>
             </div>
-            <div class="social-links">
+            <div class="social-links" id="footer-social-links">
                 <a href="https://www.linkedin.com/in/adri%C3%A1n-esp%C3%AD-pe%C3%B1a-a74304185/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.youtube.com/channel/UCa9c3-J_onhqTzerBmbXWBw" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-                <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>            </div>
+                <a href="https://zurichk.github.io/" target="_blank" rel="noopener noreferrer"><i class="fas fa-user"></i></a>
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            </div>
         </div>
-        <div class="copyright">            <p>&copy; 2025 Adrián Espí Peña - Todos los derechos reservados.</p>
+        <div class="copyright">
+            <p>&copy; 2025 Adrián Espí - Todos los derechos reservados.</p>
         </div>
-    </footer>    <script src="assets/js/config.js"></script>
+    </footer>
+
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/ui-config.js"></script>
     <script src="assets/js/analytics.js"></script>
     <script src="assets/js/lazy-loading.js"></script>

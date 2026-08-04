@@ -1,0 +1,465 @@
+[
+  {
+    "title": "Bienvenido a los Manuales de Business Central - Página principal",
+    "content": "Bienvenido a los Manuales de Business Central Recursos y guías técnicas para desarrolladores de Microsoft Dynamics 365 Business Central. Manuales de Desarrollo Guías técnicas para desarrolladores que trabajan con Business Central. Ver Manuales Integración con APIs Aprende a conectar tus aplicaciones con Business Central mediante APIs. Ver Guías Recursos Adicionales Herramientas y recursos complementarios para tu desarrollo. Ver Recursos",
+    "url": "./index.html#home",
+    "tags": [
+      "inicio",
+      "principal",
+      "home"
+    ]
+  },
+  {
+    "title": "Manuales Disponibles - Página principal",
+    "content": "Manuales Disponibles Explora nuestros manuales técnicos para desarrolladores de Business Central:",
+    "url": "./index.html#manual1",
+    "tags": [
+      "inicio",
+      "principal",
+      "home"
+    ]
+  },
+  {
+    "title": "Recursos Adicionales - Página principal",
+    "content": "Recursos Adicionales",
+    "url": "./index.html#resources",
+    "tags": [
+      "inicio",
+      "principal",
+      "home"
+    ]
+  },
+  {
+    "title": "Acerca de - Página principal",
+    "content": "Acerca de Este proyecto recopila manuales técnicos y recursos para desarrolladores que trabajan con Microsoft Dynamics 365 Business Central. El objetivo es compartir conocimiento y facilitar el aprendizaje de las tecnologías relacionadas con este ERP. Desarrollado por Adrián Espí Peña, consultor y desarrollador especializado en Business Central. Conectar en LinkedIn Canal de YouTube",
+    "url": "./index.html#about",
+    "tags": [
+      "inicio",
+      "principal",
+      "home"
+    ]
+  },
+  {
+    "title": "Manuales de Business Central",
+    "content": "BC Manuales Inicio Manuales Más Recursos Acerca de Conectar Bienvenido a los Manuales de Business Central Recursos y guías técnicas para desarrolladores de Microsoft Dynamics 365 Business Central. Manuales de Desarrollo Guías técnicas para desarrolladores que trabajan con Business Central. Ver Manuales Integración con APIs Aprende a conectar tus aplicaciones con Business Central mediante APIs. Ver Guías Recursos Adicionales Herramientas y recursos complementarios para tu desarrollo. Ver Recursos",
+    "url": "./index.html",
+    "tags": [
+      "inicio",
+      "principal",
+      "home",
+      "business central",
+      "manuales"
+    ]
+  },
+  {
+    "title": "Consumir Servicio Web desde .Net",
+    "content": "Saltar al contenido BC Manuales Inicio Manuales Más Recursos Acerca de Conectar Manual de Integración con Business Central desde .NET Contenido 1. Obtener el Token de Acceso 2. Hacer una Petición a un Servicio Web 3. Mostrar Datos en una Ventana WPF 1. Obtener el Token de Acceso Para acceder a los servicios web de Business Central, primero necesitas obtener un token de acceso de Azure Active Directory (AAD) / Microsoft Entra ID. A continuación se muestra cómo hacerlo: 1.1. Configuración de Varia",
+    "url": "./manuales/servicios-web.html",
+    "tags": [
+      "servicios-web",
+      "manual",
+      "business central",
+      "aprende",
+      "integrar",
+      "aplicaciones",
+      "servicios",
+      "business",
+      "central"
+    ]
+  },
+  {
+    "title": "Introducción - Integración con APIs REST",
+    "content": "Introducción Business Central permite integrarse fácilmente con APIs REST externas usando los objetos HttpClient y JsonToken. Esta guía te mostrará cómo implementar estas integraciones de manera efectiva. Requisitos Business Central versión 15.0 o superior Permisos para crear objetos AL Conocimientos básicos de JSON y HTTP",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "business",
+      "central",
+      "objetos",
+      "introducción",
+      "permite",
+      "integrarse",
+      "fácilmente",
+      "apis",
+      "rest",
+      "externas"
+    ]
+  },
+  {
+    "title": "Configuración Básica - Integración con APIs REST",
+    "content": "Configuración Básica Antes de comenzar a consumir APIs, necesitamos configurar nuestro entorno y crear las estructuras básicas. Crear un Codeunit para la Integración codeunit 50100 \"API Integration Management\" { trigger OnRun() begin end; local procedure InitializeHttpClient(var HttpClient: HttpClient) begin HttpClient.Clear(); HttpClient.Timeout := 30000; // 30 segundos HttpClient.DefaultRequestHeaders.Add('User-Agent', 'Business Central Integration'); end; }",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "httpclient",
+      "crear",
+      "codeunit",
+      "integration",
+      "begin",
+      "30000",
+      "50100",
+      "configuración",
+      "básica",
+      "comenzar"
+    ]
+  },
+  {
+    "title": "Consumir APIs REST - Integración con APIs REST",
+    "content": "Consumir APIs REST El proceso básico para consumir una API REST involucra varios pasos fundamentales. GET Request Básico local procedure GetApiData(Url: Text): Text var HttpClient: HttpClient; HttpResponseMessage: HttpResponseMessage; ResponseText: Text; begin InitializeHttpClient(HttpClient); if not HttpClient.Get(Url, HttpResponseMessage) then Error('Error al conectar con la API'); if not HttpResponseMessage.IsSuccessStatusCode then Error('Error HTTP: %1', HttpResponseMessage.HttpStatusCode); ",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "httpresponsemessage",
+      "httpclient",
+      "error",
+      "text",
+      "responsetext",
+      "httpcontent",
+      "httpheaders",
+      "then",
+      "content",
+      "consumir"
+    ]
+  },
+  {
+    "title": "Autenticación - Integración con APIs REST",
+    "content": "Autenticación La mayoría de APIs requieren algún tipo de autenticación. Aquí cubrimos los métodos más comunes. API Key local procedure AddApiKeyAuthentication(var HttpClient: HttpClient; ApiKey: Text) begin HttpClient.DefaultRequestHeaders.Add('X-API-Key', ApiKey); end; Bearer Token local procedure AddBearerTokenAuthentication(var HttpClient: HttpClient; Token: Text) begin HttpClient.DefaultRequestHeaders.Add('Authorization', 'Bearer ' + Token); end;",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "httpclient",
+      "token",
+      "autenticación",
+      "local",
+      "procedure",
+      "apikey",
+      "text",
+      "begin",
+      "defaultrequestheaders",
+      "bearer"
+    ]
+  },
+  {
+    "title": "Manejo de Errores - Integración con APIs REST",
+    "content": "Manejo de Errores Un manejo robusto de errores es crucial para las integraciones de producción. local procedure SafeApiCall(Url: Text; var ErrorMessage: Text): Text var HttpClient: HttpClient; HttpResponseMessage: HttpResponseMessage; ResponseText: Text; begin Clear(ErrorMessage); try InitializeHttpClient(HttpClient); if not HttpClient.Get(Url, HttpResponseMessage) then begin ErrorMessage := 'No se pudo conectar con la API'; exit(''); end; case HttpResponseMessage.HttpStatusCode of 200: begin Ht",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "errormessage",
+      "httpresponsemessage",
+      "text",
+      "httpclient",
+      "responsetext",
+      "begin",
+      "manejo",
+      "errores",
+      "exit",
+      "httpstatuscode"
+    ]
+  },
+  {
+    "title": "Ejemplos Prácticos - Integración con APIs REST",
+    "content": "Ejemplos Prácticos Veamos algunos ejemplos reales de integración con APIs populares. Ejemplo: Consultar Tasas de Cambio local procedure GetExchangeRates(): Decimal var HttpClient: HttpClient; HttpResponseMessage: HttpResponseMessage; JsonObject: JsonObject; JsonToken: JsonToken; ResponseText: Text; Rate: Decimal; begin InitializeHttpClient(HttpClient); if HttpClient.Get('https://api.exchangerate-api.com/v4/latest/USD', HttpResponseMessage) then begin HttpResponseMessage.Content.ReadAs(ResponseTe",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "httpclient",
+      "httpresponsemessage",
+      "jsonobject",
+      "jsontoken",
+      "begin",
+      "responsetext",
+      "rate",
+      "then",
+      "ejemplos",
+      "cambio"
+    ]
+  },
+  {
+    "title": "Buenas Prácticas - Integración con APIs REST",
+    "content": "Buenas Prácticas Consideraciones Importantes Timeouts: Siempre configurar timeouts apropiados Retry Logic: Implementar lógica de reintentos para errores temporales Rate Limiting: Respetar los límites de la API Logging: Registrar todas las llamadas para auditoria Seguridad: Nunca hardcodear credenciales en el código Testing: Probar exhaustivamente en ambiente de desarrollo Configuración de Setup table 50100 \"API Integration Setup\" { fields { field(1; \"Primary Key\"; Code[10]) { DataClassification ",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "field",
+      "dataclassification",
+      "systemmetadata",
+      "timeouts",
+      "retry",
+      "setup",
+      "primary",
+      "text",
+      "integer",
+      "initvalue"
+    ]
+  },
+  {
+    "title": "Integración con APIs REST",
+    "content": "Saltar al contenido BC Manuales Inicio Manuales Más Recursos Acerca de Conectar Integración con APIs REST en Business Central Guía completa para integrar Business Central con APIs REST externas Contenidos Introducción Configuración Básica Consumir APIs REST Autenticación Manejo de Errores Ejemplos Prácticos Buenas Prácticas Introducción Business Central permite integrarse fácilmente con APIs REST externas usando los objetos HttpClient y JsonToken. Esta guía te mostrará cómo implementar estas int",
+    "url": "./manuales/integracion-apis.html",
+    "tags": [
+      "integracion-apis",
+      "manual",
+      "business central",
+      "guía",
+      "completa",
+      "integrar",
+      "business",
+      "central",
+      "apis",
+      "rest",
+      "externas"
+    ]
+  },
+  {
+    "title": "Introducción a la Personalización - Personalización de Páginas",
+    "content": "Introducción a la Personalización Business Central permite personalizar las páginas de varias formas para adaptarlas a las necesidades específicas de tu organización. En este manual aprenderás las técnicas fundamentales para personalizar páginas usando AL (Application Language). Nota: Este manual asume conocimientos básicos de programación AL y el entorno de desarrollo de Business Central. Tipos de Personalización Existen varios niveles de personalización en Business Central: Page Extension: Ext",
+    "url": "./manuales/personalizacion-paginas.html#introduccion",
+    "tags": [
+      "personalizacion-paginas",
+      "manual",
+      "páginas",
+      "personalización",
+      "business",
+      "central",
+      "personalizar",
+      "manual",
+      "page",
+      "nuevas",
+      "introducción",
+      "permite"
+    ]
+  },
+  {
+    "title": "Page Extensions - Personalización de Páginas",
+    "content": "Page Extensions Las extensiones de página (Page Extension) te permiten agregar nuevos campos, acciones y modificar el comportamiento de páginas existentes sin alterar el código base. Creando una Page Extension Ejemplo básico de una extensión de página para la página Customer Card: pageextension 50100 \"Customer Card Extension\" extends \"Customer Card\" { layout { addafter(\"Name\") { field(\"Custom Field\"; Rec.\"Custom Field\") { ApplicationArea = All; ToolTip = 'Especifica un campo personalizado para e",
+    "url": "./manuales/personalizacion-paginas.html#page-extensions",
+    "tags": [
+      "personalizacion-paginas",
+      "manual",
+      "página",
+      "field",
+      "custom",
+      "personalizada",
+      "page",
+      "extension",
+      "customer",
+      "card",
+      "applicationarea",
+      "cliente"
+    ]
+  },
+  {
+    "title": "Controles Avanzados - Personalización de Páginas",
+    "content": "Controles Avanzados Business Central ofrece varios tipos de controles avanzados que puedes usar para mejorar la experiencia del usuario. Factboxes Personalizados Los Factboxes proporcionan información adicional contextual: pageextension 50101 \"Customer Card Factbox Ext\" extends \"Customer Card\" { layout { addfirst(factboxes) { part(\"Customer Statistics\"; \"Customer Statistics FactBox\") { ApplicationArea = All; SubPageLink = \"No.\" = field(\"No.\"); } part(\"Custom Info\"; \"Custom Customer FactBox\") { A",
+    "url": "./manuales/personalizacion-paginas.html#controles-avanzados",
+    "tags": [
+      "personalizacion-paginas",
+      "manual",
+      "customer",
+      "applicationarea",
+      "field",
+      "custom",
+      "customerrec",
+      "controles",
+      "factboxes",
+      "factbox",
+      "avanzados",
+      "usuario"
+    ]
+  },
+  {
+    "title": "Personalización por Perfiles - Personalización de Páginas",
+    "content": "Personalización por Perfiles Business Central permite crear personalizaciones específicas para diferentes perfiles de usuario, adaptando la interfaz según el rol del usuario. Configuración de Perfiles Los perfiles permiten personalizar la experiencia del usuario: profile \"Custom Sales Profile\" { Caption = 'Vendedor Personalizado'; RoleCenter = \"Custom Sales Role Center\"; Enabled = true; Customizations = \"Sales Order Processor Customization\"; } Page Customization Ejemplo de personalización especí",
+    "url": "./manuales/personalizacion-paginas.html#personalizacion-perfiles",
+    "tags": [
+      "personalizacion-paginas",
+      "manual",
+      "sales",
+      "perfiles",
+      "usuario",
+      "order",
+      "customization",
+      "modify",
+      "visible",
+      "personalización",
+      "personalizaciones",
+      "interfaz"
+    ]
+  },
+  {
+    "title": "Mejores Prácticas - Personalización de Páginas",
+    "content": "Mejores Prácticas Para mantener la calidad y mantenibilidad de tus personalizaciones, sigue estas mejores prácticas: Convenciones de Nombres Usa prefijos consistentes para tus objetos (ej: 50100-50199 para Customer) Nombres descriptivos para campos y acciones Documenta el propósito de cada personalización Rendimiento Minimiza el número de campos visibles en las listas Usa FlowFields para cálculos complejos Implementa filtros apropiados en SubPages Considera el impacto en la base de datos Manteni",
+    "url": "./manuales/personalizacion-paginas.html#mejores-practicas",
+    "tags": [
+      "personalizacion-paginas",
+      "manual",
+      "envío",
+      "campos",
+      "información",
+      "shipping",
+      "mejores",
+      "prácticas",
+      "mantenibilidad",
+      "nombres",
+      "sales",
+      "invoice"
+    ]
+  },
+  {
+    "title": "Personalización de Páginas",
+    "content": "Saltar al contenido BC Manuales Inicio Manuales Más Recursos Acerca de Conectar Contenido Personalización de Páginas en Business Central Inicio > Manuales > Personalización de Páginas Introducción a la Personalización Business Central permite personalizar las páginas de varias formas para adaptarlas a las necesidades específicas de tu organización. En este manual aprenderás las técnicas fundamentales para personalizar páginas usando AL (Application Language). Nota: Este manual asume conocimiento",
+    "url": "./manuales/personalizacion-paginas.html",
+    "tags": [
+      "personalizacion-paginas",
+      "manual",
+      "business central",
+      "guía",
+      "completa",
+      "personalizar",
+      "páginas",
+      "business",
+      "central",
+      "usando"
+    ]
+  },
+  {
+    "title": "Introducción - Integración Power Automate",
+    "content": "Introducción Power Automate es una herramienta de automatización que permite crear flujos de trabajo entre aplicaciones y servicios. La integración con Business Central permite automatizar procesos empresariales, sincronizar datos y crear notificaciones inteligentes. Beneficios: Automatización de procesos, reducción de errores manuales, integración con Office 365, y notificaciones en tiempo real.",
+    "url": "./manuales/power-automate-integracion.html",
+    "tags": [
+      "power-automate-integracion",
+      "manual",
+      "automatización",
+      "permite",
+      "crear",
+      "integración",
+      "procesos",
+      "notificaciones",
+      "introducción",
+      "power",
+      "automate",
+      "herramienta"
+    ]
+  },
+  {
+    "title": "Conectores Disponibles - Integración Power Automate",
+    "content": "Conectores Disponibles Business Central Conector oficial para Business Central que permite crear, leer, actualizar y eliminar registros. Trigger: Al crear registro Acción: CRUD Operations Office 365 Outlook Envía correos automáticos basados en eventos de Business Central. Acción: Enviar email Acción: Crear evento",
+    "url": "./manuales/power-automate-integracion.html",
+    "tags": [
+      "power-automate-integracion",
+      "manual",
+      "business",
+      "central",
+      "crear",
+      "acción",
+      "conectores",
+      "disponibles",
+      "conector",
+      "oficial",
+      "permite",
+      "leer"
+    ]
+  },
+  {
+    "title": "Configuración Inicial - Integración Power Automate",
+    "content": "Configuración Inicial 1. Habilitar API en Business Central Primero, debes habilitar las APIs en Business Central: // En Business Central Admin Center // 1. Ir a Environments // 2. Seleccionar environment // 3. Ir a API Management // 4. Habilitar \"Enable APIs\" 2. Configurar Autenticación Configura la autenticación para Power Automate: { \"client_id\": \"tu-app-id\", \"client_secret\": \"tu-client-secret\", \"tenant_id\": \"tu-tenant-id\", \"environment\": \"nombre-environment\", \"company\": \"nombre-empresa\" } 3. ",
+    "url": "./manuales/power-automate-integracion.html",
+    "tags": [
+      "power-automate-integracion",
+      "manual",
+      "customer",
+      "httprequestmessage",
+      "jsonobject",
+      "habilitar",
+      "business",
+      "central",
+      "environment",
+      "triggers",
+      "begin",
+      "httpclient"
+    ]
+  },
+  {
+    "title": "Ejemplos de Flujos - Integración Power Automate",
+    "content": "Ejemplos de Flujos Flujo 1: Notificación de Nueva Factura Trigger: Cuando se crea una nueva factura de venta Acción: Enviar email al director comercial { \"trigger\": { \"type\": \"When a record is created (V3)\", \"inputs\": { \"environment\": \"Production\", \"entityName\": \"salesInvoices\" } }, \"actions\": { \"Send_email\": { \"type\": \"Send an email (V2)\", \"inputs\": { \"to\": \"director@empresa.com\", \"subject\": \"Nueva factura creada: @{triggerBody()['number']}\", \"body\": \"Se ha creado una nueva factura por importe ",
+    "url": "./manuales/power-automate-integracion.html",
+    "tags": [
+      "power-automate-integracion",
+      "manual",
+      "jsonobject",
+      "type",
+      "httprequestmessage",
+      "trigger",
+      "triggerbody",
+      "nueva",
+      "factura",
+      "email",
+      "record",
+      "inputs"
+    ]
+  },
+  {
+    "title": "Mejores Prácticas - Integración Power Automate",
+    "content": "Mejores Prácticas Hacer Usar autenticación segura (OAuth 2.0) Implementar manejo de errores Validar datos antes de enviar Usar filtros en triggers Monitorear rendimiento Evitar Loops infinitos en triggers Envío masivo sin control Credenciales hardcodeadas Triggers en cada modificación Falta de logs y auditoría",
+    "url": "./manuales/power-automate-integracion.html",
+    "tags": [
+      "power-automate-integracion",
+      "manual",
+      "triggers",
+      "usar",
+      "mejores",
+      "prácticas",
+      "hacer",
+      "autenticación",
+      "segura",
+      "oauth",
+      "implementar",
+      "manejo"
+    ]
+  },
+  {
+    "title": "Solución de Problemas - Integración Power Automate",
+    "content": "Solución de Problemas Error de Autenticación Problema: \"Unauthorized\" o \"403 Forbidden\" Solución: Verificar permisos de API, renovar tokens, y validar configuración de Azure AD. Timeouts en Flujos Problema: Flujos que tardan demasiado en ejecutarse Solución: Optimizar consultas, usar filtros, y implementar procesamiento por lotes.",
+    "url": "./manuales/power-automate-integracion.html",
+    "tags": [
+      "power-automate-integracion",
+      "manual",
+      "solución",
+      "problema",
+      "flujos",
+      "problemas",
+      "error",
+      "autenticación",
+      "unauthorized",
+      "forbidden",
+      "verificar",
+      "permisos"
+    ]
+  },
+  {
+    "title": "Integración Power Automate",
+    "content": "BC Manuales Inicio Manuales Inicio Integración Power Automate Integración Power Automate y Business Central Automatiza procesos empresariales integrando Power Automate con Business Central Flujo de Integración Business Central Power Automate Servicios Externos Introducción Power Automate es una herramienta de automatización que permite crear flujos de trabajo entre aplicaciones y servicios. La integración con Business Central permite automatizar procesos empresariales, sincronizar datos y crear ",
+    "url": "./manuales/power-automate-integracion.html",
+    "tags": [
+      "power-automate-integracion",
+      "manual",
+      "business central",
+      "automatiza",
+      "procesos",
+      "empresariales",
+      "integrando",
+      "power",
+      "automate",
+      "business",
+      "central"
+    ]
+  }
+]

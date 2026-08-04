@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (dropbtn) {
                 dropbtn.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 768) {
+                    if (window.innerWidth <= 900) {
                         e.preventDefault();
                         this.parentNode.classList.toggle('dropdown-open');
                         // Mantener atributo aria-expanded sincronizado
